@@ -40,3 +40,4 @@ focus --class ~.model.PlantHireRequest
 field reference --fieldName constructionSite --type ~.model.ConstructionSite --cardinality ONE_TO_ONE
 field reference --fieldName requestedPlant --type ~.model.RequestedPlant --cardinality ONE_TO_ONE
 field reference --fieldName siteEngineer --type ~.model.SiteEngineer --cardinality ONE_TO_ONE
+web mvc all --package ~.web
