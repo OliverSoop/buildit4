@@ -4,3 +4,39 @@ project --topLevelPackage ee.ut --projectName BUILD_IT --java 7 --packaging JAR
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-09-30 12:21:21
 jpa setup --database POSTGRES --provider HIBERNATE --databaseName build_it --hostName localhost --userName postgres --password postgres
 web mvc setup
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-09-30 13:22:20
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-06 18:45:38
+entity jpa --class ~.model.Engineer --abstract --inheritanceType SINGLE_TABLE
+field string --fieldName name
+entity jpa --class ~.model.SiteEngineer --extends ~.model.Engineer
+entity jpa --class ~.model.ConstructionSite
+field string --fieldName name
+field string --fieldName location
+entity jpa --class ~.model.Supplier
+field string --fieldName name
+entity jpa --class ~.model.PlantHireRequest
+field date --fieldName startDate --type java.util.Date
+field date --fieldName endDate --type java.util.Date
+field number --fieldName totalCost --type java.lang.Float
+entity jpa --class ~.model.PurchaseOrder
+enum type --class ~.domain.PurchaseOrderStatus
+enum constant --name ACCEPTED
+enum constant --name REJECTED
+enum constant --name CREATED
+focus --class ~.model.PurchaseOrder
+field enum --fieldName status --type ~.domain.PurchaseOrderStatus
+field reference --fieldName plantHireRequest --type ~.model.PlantHireRequest --cardinality ONE_TO_ONE
+entity jpa --class ~.model.RequestedPlant
+field string --fieldName externalId
+field string --fieldName description
+field reference --fieldName supplier --type ~.model.Supplier --cardinality ONE_TO_ONE
+focus --class ~.model.ConstructionSite
+// [failed] field reference --fieldName siteEngineers --type ~.model.SiteEngineer --cardinality MANY_TO_MANY
+// [failed] field reference --fieldName siteEngineers --type ~.model.SiteEngineer --cardinality ONE_TO_MANY
+// [failed] field reference --fieldName siteEngineers --type ~.model.SiteEngineer --cardinality ONE_TO_MANY
+field set --fieldName siteEngineers --type ~.model.SiteEngineer --cardinality ONE_TO_MANY
+focus --class ~.model.Supplier
+focus --class ~.model.PlantHireRequest
+field reference --fieldName constructionSite --type ~.model.ConstructionSite --cardinality ONE_TO_ONE
+field reference --fieldName requestedPlant --type ~.model.RequestedPlant --cardinality ONE_TO_ONE
+field reference --fieldName siteEngineer --type ~.model.SiteEngineer --cardinality ONE_TO_ONE
