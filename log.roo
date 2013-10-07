@@ -41,3 +41,4 @@ field reference --fieldName constructionSite --type ~.model.ConstructionSite --c
 field reference --fieldName requestedPlant --type ~.model.RequestedPlant --cardinality ONE_TO_ONE
 field reference --fieldName siteEngineer --type ~.model.SiteEngineer --cardinality ONE_TO_ONE
 web mvc all --package ~.web
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-06 20:28:45
