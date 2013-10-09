@@ -5,6 +5,10 @@ import org.springframework.roo.addon.tostring.RooToString;
 import ee.ut.domain.PurchaseOrderStatus;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
+import java.util.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @RooJavaBean
 @RooToString
@@ -20,4 +24,10 @@ public class PurchaseOrder {
      */
     @OneToOne
     private PlantHireRequest plantHireRequest;
+
+    /**
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date dateCreated;
 }

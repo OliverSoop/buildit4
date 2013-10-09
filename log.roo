@@ -42,3 +42,6 @@ field reference --fieldName requestedPlant --type ~.model.RequestedPlant --cardi
 field reference --fieldName siteEngineer --type ~.model.SiteEngineer --cardinality ONE_TO_ONE
 web mvc all --package ~.web
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-06 20:28:45
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-09 21:01:34
+focus --class ~.model.PurchaseOrder
+field date --fieldName dateCreated --type java.util.Date

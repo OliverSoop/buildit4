@@ -6,6 +6,7 @@ package ee.ut.model;
 import ee.ut.domain.PurchaseOrderStatus;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.PurchaseOrder;
+import java.util.Date;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
@@ -23,6 +24,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setPlantHireRequest(PlantHireRequest plantHireRequest) {
         this.plantHireRequest = plantHireRequest;
+    }
+    
+    public Date PurchaseOrder.getDateCreated() {
+        return this.dateCreated;
+    }
+    
+    public void PurchaseOrder.setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
     
 }
