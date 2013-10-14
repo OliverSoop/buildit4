@@ -45,3 +45,5 @@ web mvc all --package ~.web
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-09 21:01:34
 focus --class ~.model.PurchaseOrder
 field date --fieldName dateCreated --type java.util.Date
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-09 21:26:04
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-14 10:47:04

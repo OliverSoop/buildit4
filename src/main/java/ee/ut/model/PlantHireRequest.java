@@ -2,6 +2,7 @@ package ee.ut.model;
 import java.util.Date;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -39,7 +40,7 @@ public class PlantHireRequest {
 
     /**
      */
-    @ManyToOne
+    @OneToOne
     private RequestedPlant requestedPlant;
 
     /**
