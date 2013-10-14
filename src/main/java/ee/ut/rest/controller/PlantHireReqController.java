@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import ee.ut.model.RequestedPlant;
 import ee.ut.model.SiteEngineer;
 import ee.ut.model.Supplier;
 import ee.ut.rest.PlantHireRequestResource;
+import ee.ut.rest.PlantHireRequestResourceAssembler;
 import ee.ut.rest.RequestedPlantResource;
 
 @Controller
@@ -65,7 +67,7 @@ public class PlantHireReqController {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().
 				 pathSegment(plantHireRequest.getId().toString()).build().toUri();
 		headers.setLocation(location);
-		ResponseEntity<Void> response = new ResponseEntity<>(headers, HttpStatus.CREATED);
+		ResponseEntity<Void> response = new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 		return response;
 	}
 	 
@@ -81,24 +83,26 @@ public class PlantHireReqController {
 	}
 	 
 	@RequestMapping
-	(method = RequestMethod.DELETE, value ="/{phr.id}")
-	public ResponseEntity<Void> deletePlantHireRequest(@RequestBody PlantHireRequestResource phr) {
-		
+	(method = RequestMethod.DELETE, value ="/{id}")
+	public ResponseEntity<Void> deletePlantHireRequest(@PathVariable Long id) {
+		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
+		if (phr != null) {
+			phr.remove();
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
 		 
-		 
-		 HttpHeaders headers = new HttpHeaders();
-		 ResponseEntity<Void> response = new ResponseEntity<>(headers, HttpStatus.CREATED);
-		 return response;
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 	
 	@RequestMapping
-	(method = RequestMethod.GET, value ="/{phr.id}")
-	public ResponseEntity<Void> getPlantHireRequest(@RequestBody PlantHireRequestResource phr) {
-		
-		 
-		 
-		 HttpHeaders headers = new HttpHeaders();
-		 ResponseEntity<Void> response = new ResponseEntity<>(headers, HttpStatus.CREATED);
-		 return response;
+	(method = RequestMethod.GET, value ="/{id}")
+	public ResponseEntity<PlantHireRequestResource> getPlantHireRequest(@PathVariable Long id) {
+		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
+		if (phr != null) {
+			PlantHireRequestResource plantHireRequest = PlantHireRequestResourceAssembler.create(phr);
+			return new ResponseEntity<PlantHireRequestResource>(plantHireRequest, HttpStatus.OK);
+			
+		}
+		return new ResponseEntity<PlantHireRequestResource>(HttpStatus.NOT_FOUND);
 	}
 }

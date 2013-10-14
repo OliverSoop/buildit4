@@ -47,3 +47,13 @@ focus --class ~.model.PurchaseOrder
 field date --fieldName dateCreated --type java.util.Date
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-09 21:26:04
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-14 10:47:04
+// [failed] test integration --entity ~.rest.controller.PlantHireReqController.java
+// [failed] test integration --entity ~.rest.controller.PlantHireReqController
+test mock
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-14 13:34:37
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-14 19:29:07
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
