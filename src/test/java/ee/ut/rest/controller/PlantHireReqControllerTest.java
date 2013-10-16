@@ -23,7 +23,7 @@ import ee.ut.rest.SupplierResource;
 @RunWith(JUnit4.class)
 public class PlantHireReqControllerTest {
 	
-	private static String DOMAIN_URL = "http://buildit4.heroku.com/";
+	private static String DOMAIN_URL = "http://buildit4.herokuapp.com/";
 	
 
     @Test
@@ -50,6 +50,21 @@ public class PlantHireReqControllerTest {
     	ClientResponse response = createPlantHireRequestResource();
     	URI location = response.getLocation();
     	assertTrue(getPlantHireRequestResource(location).getStatus() == ClientResponse.Status.OK.getStatusCode());
+    }
+    
+    @Test
+    public void testUpdatePHR() {
+    	ClientResponse response = createPlantHireRequestResource();
+    	if(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode()){
+    		
+    		URI uri = response.getLocation();
+    		
+    		ClientResponse responseModified = modifiedPlantHireRequestResource(uri);
+
+    		if(responseModified.getStatus() == ClientResponse.Status.CREATED.getStatusCode()){
+    	    	assertTrue(getPlantHireRequestResource(responseModified.getLocation()).getStatus() == ClientResponse.Status.OK.getStatusCode());
+    		}
+    	}
     }
     
     private ClientResponse getPlantHireRequestResource(URI location) {
@@ -84,6 +99,37 @@ public class PlantHireReqControllerTest {
     	
     	SupplierResource supplier = new SupplierResource();
     	supplier.setName("Toshiba");
+    	rpr.setSupplier(supplier);
+    	phr.setRequestedPlant(rpr);
+    	return  webResource.type(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_XML)
+				.post(ClientResponse.class, phr);
+    }
+    
+    private ClientResponse modifiedPlantHireRequestResource(URI uri) {
+    	Client client = Client.create();
+    	WebResource webResource = client.resource(uri);
+    	
+    	PlantHireRequestResource phr = new PlantHireRequestResource();
+    	phr.setStartDate(new Date());
+    	phr.setEndDate(new Date());
+    	phr.setTotalCost(40.2F);
+    	
+    	ConstructionSiteResource site = new ConstructionSiteResource();
+    	site.setLocation("Simpson");
+    	site.setName("Construction site modified");
+    	phr.setConstructionSite(site);
+    	
+    	SiteEngineerResource engineer = new SiteEngineerResource();
+    	engineer.setName("Petrol Engine");
+    	phr.setSiteEngineer(engineer);
+    	
+    	RequestedPlantResource rpr = new RequestedPlantResource();
+    	rpr.setDescription("Hammer");
+    	rpr.setExternalId("C0020");
+    	
+    	SupplierResource supplier = new SupplierResource();
+    	supplier.setName("Dell");
     	rpr.setSupplier(supplier);
     	phr.setRequestedPlant(rpr);
     	return  webResource.type(MediaType.APPLICATION_XML)

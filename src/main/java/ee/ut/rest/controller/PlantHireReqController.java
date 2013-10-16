@@ -72,14 +72,53 @@ public class PlantHireReqController {
 	}
 	 
 	@RequestMapping
-	(method = RequestMethod.POST, value ="/{phr.id}")
-	public ResponseEntity<Void> updatePlantHireRequest(@RequestBody PlantHireRequestResource phr) {
-		
+	(method = RequestMethod.POST, value ="/{id}")
+	public ResponseEntity<Void> updatePlantHireRequest(@RequestBody PlantHireRequestResource phr, @PathVariable Long id) {
+		PlantHireRequest phr_toBeChanged = PlantHireRequest.findPlantHireRequest(id);
+		if (phr_toBeChanged != null) {
+			PlantHireRequest plantHireRequest = phr_toBeChanged;
+			plantHireRequest.setStartDate(phr.getStartDate());
+			plantHireRequest.setEndDate(phr.getEndDate());
+			plantHireRequest.setTotalCost(phr.getTotalCost());
+			
+			ConstructionSite constructionSite = new ConstructionSite();
+			constructionSite.setLocation(phr.getConstructionSite().getLocation());
+			constructionSite.setName(phr.getConstructionSite().getName());
+			constructionSite.persist();
+			
+			SiteEngineer siteEngineer = new SiteEngineer();
+			siteEngineer.setName(phr.getSiteEngineer().getName());
+			constructionSite.setSiteEngineers(Collections.singleton(siteEngineer));
+			siteEngineer.persist();
+			
+			plantHireRequest.setConstructionSite(constructionSite);
+			plantHireRequest.setSiteEngineer(siteEngineer);
+			
+			RequestedPlantResource requestedPlant = phr.getRequestedPlant();
+			RequestedPlant plant = new RequestedPlant();
+			plant.setDescription(requestedPlant.getDescription());
+			plant.setExternalId(requestedPlant.getExternalId());
+			
+			Supplier supplier = new Supplier();
+			supplier.setName(requestedPlant.getSupplier().getName());
+			supplier.persist();
+			plant.setSupplier(supplier);
+			plant.persist();
+			
+			plantHireRequest.setRequestedPlant(plant);
+			
+			plantHireRequest.persist();
+			 
+			
+			HttpHeaders headers = new HttpHeaders();
+			URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().
+					 build().toUri();
+			headers.setLocation(location);
+			ResponseEntity<Void> response = new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+			return response;
+		}
 		 
-		 
-		 HttpHeaders headers = new HttpHeaders();
-		 ResponseEntity<Void> response = new ResponseEntity<>(headers, HttpStatus.CREATED);
-		 return response;
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 	 
 	@RequestMapping
