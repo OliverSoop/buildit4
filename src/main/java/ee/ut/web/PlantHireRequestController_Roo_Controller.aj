@@ -3,12 +3,14 @@
 
 package ee.ut.web;
 
+import ee.ut.domain.PlantHireRequestStatus;
 import ee.ut.model.ConstructionSite;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.RequestedPlant;
 import ee.ut.model.SiteEngineer;
 import ee.ut.web.PlantHireRequestController;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -99,6 +101,7 @@ privileged aspect PlantHireRequestController_Roo_Controller {
     void PlantHireRequestController.populateEditForm(Model uiModel, PlantHireRequest plantHireRequest) {
         uiModel.addAttribute("plantHireRequest", plantHireRequest);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("planthirerequeststatuses", Arrays.asList(PlantHireRequestStatus.values()));
         uiModel.addAttribute("constructionsites", ConstructionSite.findAllConstructionSites());
         uiModel.addAttribute("requestedplants", RequestedPlant.findAllRequestedPlants());
         uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());

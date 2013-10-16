@@ -59,4 +59,12 @@ privileged aspect PlantHireRequestResource_Roo_JavaBean {
         this.constructionSite = constructionSite;
     }
     
+    public String PlantHireRequestResource.getStatus() {
+        return this.status;
+    }
+    
+    public void PlantHireRequestResource.setStatus(String status) {
+        this.status = status;
+    }
+    
 }

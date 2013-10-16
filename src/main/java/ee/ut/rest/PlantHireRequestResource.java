@@ -16,4 +16,5 @@ public class PlantHireRequestResource {
     private RequestedPlantResource requestedPlant;
     private SiteEngineerResource siteEngineer;
     private ConstructionSiteResource constructionSite;
+    private String status;
 }

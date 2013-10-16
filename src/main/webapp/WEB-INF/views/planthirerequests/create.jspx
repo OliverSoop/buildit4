@@ -9,6 +9,7 @@
         <field:select field="constructionSite" id="c_ee_ut_model_PlantHireRequest_constructionSite" itemValue="id" items="${constructionsites}" path="/constructionsites" z="pf0UXMoc9KNNyt1r1OSfI8sFEJY="/>
         <field:select field="requestedPlant" id="c_ee_ut_model_PlantHireRequest_requestedPlant" itemValue="id" items="${requestedplants}" path="/requestedplants" z="Fx5a9rjc04ASbrlWnUkk6yguvL0="/>
         <field:select field="siteEngineer" id="c_ee_ut_model_PlantHireRequest_siteEngineer" itemValue="id" items="${siteengineers}" path="/siteengineers" z="btId0FlE+PgFHt9Ux1A7DjV+kqE="/>
+        <field:select field="status" id="c_ee_ut_model_PlantHireRequest_status" items="${planthirerequeststatuses}" path="planthirerequeststatuses" z="2nMTauFw4B8kvYaoisOekPPXFKY="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_ee_ut_model_PlantHireRequest" render="${not empty dependencies}" z="UMuVrEQrxKJMv9Kwqom8GaCAjmw="/>
 </div>

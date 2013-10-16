@@ -3,6 +3,7 @@
 
 package ee.ut.model;
 
+import ee.ut.domain.PlantHireRequestStatus;
 import ee.ut.model.ConstructionSite;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.RequestedPlant;
@@ -57,6 +58,14 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
     
     public void PlantHireRequest.setSiteEngineer(SiteEngineer siteEngineer) {
         this.siteEngineer = siteEngineer;
+    }
+    
+    public PlantHireRequestStatus PlantHireRequest.getStatus() {
+        return this.status;
+    }
+    
+    public void PlantHireRequest.setStatus(PlantHireRequestStatus status) {
+        this.status = status;
     }
     
 }

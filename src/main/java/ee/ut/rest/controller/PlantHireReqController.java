@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import ee.ut.domain.PlantHireRequestStatus;
 import ee.ut.model.ConstructionSite;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.RequestedPlant;
@@ -33,6 +34,7 @@ public class PlantHireReqController {
 		plantHireRequest.setStartDate(phr.getStartDate());
 		plantHireRequest.setEndDate(phr.getEndDate());
 		plantHireRequest.setTotalCost(phr.getTotalCost());
+		plantHireRequest.setStatus(PlantHireRequestStatus.CREATED);
 		
 		ConstructionSite constructionSite = new ConstructionSite();
 		constructionSite.setLocation(phr.getConstructionSite().getLocation());

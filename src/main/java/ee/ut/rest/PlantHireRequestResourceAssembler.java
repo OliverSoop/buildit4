@@ -9,6 +9,7 @@ public class PlantHireRequestResourceAssembler {
 		plantHireRequest.setStartDate(phr.getStartDate());
 		plantHireRequest.setEndDate(phr.getEndDate());
 		plantHireRequest.setTotalCost(phr.getTotalCost());
+		plantHireRequest.setStatus(phr.getStatus().name());
 		
 		ConstructionSiteResource constructionSite = new ConstructionSiteResource();
 		constructionSite.setLocation(phr.getConstructionSite().getLocation());

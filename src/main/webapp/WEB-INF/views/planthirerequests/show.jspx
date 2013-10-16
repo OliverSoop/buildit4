@@ -9,5 +9,6 @@
         <field:display field="constructionSite" id="s_ee_ut_model_PlantHireRequest_constructionSite" object="${planthirerequest}" z="BVszjGq1aJTafFPAwrOL48zo9wY="/>
         <field:display field="requestedPlant" id="s_ee_ut_model_PlantHireRequest_requestedPlant" object="${planthirerequest}" z="RrX6X19qdv9LauKS2Fr9HS3fnE0="/>
         <field:display field="siteEngineer" id="s_ee_ut_model_PlantHireRequest_siteEngineer" object="${planthirerequest}" z="tICffPNp9Mu5FUX7BC4E0zOJM5c="/>
+        <field:display field="status" id="s_ee_ut_model_PlantHireRequest_status" object="${planthirerequest}" z="C177NA3LH6dkkg6AMhKT1GOzCHY="/>
     </page:show>
 </div>
