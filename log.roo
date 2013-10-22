@@ -65,3 +65,6 @@ perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-19 14:23:12
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-19 14:24:37
 perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-22 17:26:28
+repository jpa --interface ~.repository.PurchaseOrderRepository --entity ~.model.PurchaseOrder
+repository jpa --interface ~.repository.ConstructionSiteRepository --entity ~.model.ConstructionSite

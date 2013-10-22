@@ -1,20 +1,27 @@
 package ee.ut.rest;
 
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+
 import ee.ut.model.PlantHireRequest;
+import ee.ut.rest.controller.PlantHireReqController;
 
-public class PlantHireRequestResourceAssembler {
+public class PlantHireRequestResourceAssembler extends ResourceAssemblerSupport<PlantHireRequest, PlantHireRequestResource>{
+	
+	public PlantHireRequestResourceAssembler() {
+		super(PlantHireReqController.class, PlantHireRequestResource.class);
+	}
 
-	public static PlantHireRequestResource create(PlantHireRequest phr) {
+	public static PlantHireRequestResource create(PlantHireRequest phr) throws NoSuchMethodException, SecurityException {
 		PlantHireRequestResource plantHireRequest = new PlantHireRequestResource();
 		plantHireRequest.setStartDate(phr.getStartDate());
 		plantHireRequest.setEndDate(phr.getEndDate());
 		plantHireRequest.setTotalCost(phr.getTotalCost());
 		plantHireRequest.setStatus(phr.getStatus().name());
 		
-		ConstructionSiteResource constructionSite = new ConstructionSiteResource();
-		constructionSite.setLocation(phr.getConstructionSite().getLocation());
-		constructionSite.setName(phr.getConstructionSite().getName());
-		plantHireRequest.setConstructionSite(constructionSite);
+		ConstructionSiteResourceAssembler csAssembler = new ConstructionSiteResourceAssembler();
+		csAssembler.toResource(phr.getConstructionSite());
+		
+		plantHireRequest.setConstructionSite(csAssembler.toResource(phr.getConstructionSite()));
 		
 		RequestedPlantResource rpr = new RequestedPlantResource();
 		rpr.setDescription(phr.getRequestedPlant().getDescription());
@@ -24,11 +31,16 @@ public class PlantHireRequestResourceAssembler {
 		rpr.setSupplier(supplier);
 		plantHireRequest.setRequestedPlant(rpr);
 		
-		
-		SiteEngineerResource siteEngineer = new SiteEngineerResource();
-		siteEngineer.setName(phr.getSiteEngineer().getName());
-		plantHireRequest.setSiteEngineer(siteEngineer);
+		SiteEngineerResourceAssembler seAssembler = new SiteEngineerResourceAssembler();
+		seAssembler.toResource(phr.getSiteEngineer());
+		plantHireRequest.setSiteEngineer(seAssembler.toResource(phr.getSiteEngineer()));
 		
 		return plantHireRequest;
+	}
+
+	@Override
+	public PlantHireRequestResource toResource(PlantHireRequest phr) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -2,5 +2,5 @@ package ee.ut.domain;
 
 public enum PlantHireRequestStatus {
 
-    CREATED, REJECTED, ACCEPTED
+    PENDING_CONFIRMATION, REJECTED, MODIFIED, OPEN, CANCELLED
 }
