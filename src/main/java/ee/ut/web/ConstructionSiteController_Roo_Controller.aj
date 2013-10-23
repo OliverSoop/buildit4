@@ -5,10 +5,12 @@ package ee.ut.web;
 
 import ee.ut.model.ConstructionSite;
 import ee.ut.model.SiteEngineer;
+import ee.ut.repository.ConstructionSiteRepository;
 import ee.ut.web.ConstructionSiteController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect ConstructionSiteController_Roo_Controller {
     
+    @Autowired
+    ConstructionSiteRepository ConstructionSiteController.constructionSiteRepository;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ConstructionSiteController.create(@Valid ConstructionSite constructionSite, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -27,7 +32,7 @@ privileged aspect ConstructionSiteController_Roo_Controller {
             return "constructionsites/create";
         }
         uiModel.asMap().clear();
-        constructionSite.persist();
+        constructionSiteRepository.save(constructionSite);
         return "redirect:/constructionsites/" + encodeUrlPathSegment(constructionSite.getId().toString(), httpServletRequest);
     }
     
@@ -39,7 +44,7 @@ privileged aspect ConstructionSiteController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ConstructionSiteController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("constructionsite", ConstructionSite.findConstructionSite(id));
+        uiModel.addAttribute("constructionsite", constructionSiteRepository.findOne(id));
         uiModel.addAttribute("itemId", id);
         return "constructionsites/show";
     }
@@ -49,11 +54,11 @@ privileged aspect ConstructionSiteController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("constructionsites", ConstructionSite.findConstructionSiteEntries(firstResult, sizeNo));
-            float nrOfPages = (float) ConstructionSite.countConstructionSites() / sizeNo;
+            uiModel.addAttribute("constructionsites", constructionSiteRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
+            float nrOfPages = (float) constructionSiteRepository.count() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("constructionsites", ConstructionSite.findAllConstructionSites());
+            uiModel.addAttribute("constructionsites", constructionSiteRepository.findAll());
         }
         return "constructionsites/list";
     }
@@ -65,20 +70,20 @@ privileged aspect ConstructionSiteController_Roo_Controller {
             return "constructionsites/update";
         }
         uiModel.asMap().clear();
-        constructionSite.merge();
+        constructionSiteRepository.save(constructionSite);
         return "redirect:/constructionsites/" + encodeUrlPathSegment(constructionSite.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String ConstructionSiteController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, ConstructionSite.findConstructionSite(id));
+        populateEditForm(uiModel, constructionSiteRepository.findOne(id));
         return "constructionsites/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String ConstructionSiteController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        ConstructionSite constructionSite = ConstructionSite.findConstructionSite(id);
-        constructionSite.remove();
+        ConstructionSite constructionSite = constructionSiteRepository.findOne(id);
+        constructionSiteRepository.delete(constructionSite);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

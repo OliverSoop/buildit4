@@ -28,7 +28,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Oliver/.m2/repository/org/springframework/data/spring-data-jpa/1.2.0.RELEASE/spring-data-jpa-1.2.0.RELEASE.jar">
+	<classpathentry kind="lib" path="C:/Users/Lauri/.m2/repository/org/springframework/data/spring-data-jpa/1.2.0.RELEASE/spring-data-jpa-1.2.0.RELEASE.jar">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="maven.groupId" value="org.springframework.data"/>

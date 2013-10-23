@@ -9,7 +9,10 @@ import ee.ut.model.PurchaseOrder;
 import ee.ut.model.RequestedPlant;
 import ee.ut.model.SiteEngineer;
 import ee.ut.model.Supplier;
+import ee.ut.repository.ConstructionSiteRepository;
+import ee.ut.repository.PurchaseOrderRepository;
 import ee.ut.web.ApplicationConversionServiceFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -17,6 +20,12 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    @Autowired
+    ConstructionSiteRepository ApplicationConversionServiceFactoryBean.constructionSiteRepository;
+    
+    @Autowired
+    PurchaseOrderRepository ApplicationConversionServiceFactoryBean.purchaseOrderRepository;
     
     public Converter<ConstructionSite, String> ApplicationConversionServiceFactoryBean.getConstructionSiteToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ee.ut.model.ConstructionSite, java.lang.String>() {
@@ -29,7 +38,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, ConstructionSite> ApplicationConversionServiceFactoryBean.getIdToConstructionSiteConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, ee.ut.model.ConstructionSite>() {
             public ee.ut.model.ConstructionSite convert(java.lang.Long id) {
-                return ConstructionSite.findConstructionSite(id);
+                return constructionSiteRepository.findOne(id);
             }
         };
     }
@@ -77,7 +86,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, PurchaseOrder> ApplicationConversionServiceFactoryBean.getIdToPurchaseOrderConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, ee.ut.model.PurchaseOrder>() {
             public ee.ut.model.PurchaseOrder convert(java.lang.Long id) {
-                return PurchaseOrder.findPurchaseOrder(id);
+                return purchaseOrderRepository.findOne(id);
             }
         };
     }

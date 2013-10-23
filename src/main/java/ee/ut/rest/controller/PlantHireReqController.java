@@ -6,6 +6,9 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.Collections;
+import java.util.Date;
+
+import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
 import ee.ut.domain.PlantHireRequestStatus;
+import ee.ut.domain.PurchaseOrderStatus;
 import ee.ut.model.ConstructionSite;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.PurchaseOrder;
@@ -29,6 +37,7 @@ import ee.ut.model.Supplier;
 import ee.ut.repository.PurchaseOrderRepository;
 import ee.ut.rest.PlantHireRequestResource;
 import ee.ut.rest.PlantHireRequestResourceAssembler;
+import ee.ut.rest.PurchaseOrderResource;
 import ee.ut.rest.RequestedPlantResource;
 import ee.ut.service.PlantHireRequestService;
 import ee.ut.service.PlantHireRequestService.ConstructionSiteNotFoundException;
@@ -188,10 +197,51 @@ public class PlantHireReqController {
 		if (phr != null) {
 			if (phr.getStatus() == PlantHireRequestStatus.PENDING_CONFIRMATION) {
 				phr.setStatus(PlantHireRequestStatus.OPEN);
-				return new ResponseEntity<Void>(HttpStatus.OK);
+				PurchaseOrder po = new PurchaseOrder();
+				po.setPlantHireRequest(phr);
+				po.setStatus(PurchaseOrderStatus.CREATED);
+				po.setDateCreated(new Date());
+				po.persist();
+				
+				if(submitPO(po)){
+					return new ResponseEntity<Void>(HttpStatus.OK);
+				}
+				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 			}
 			return new ResponseEntity<Void>(HttpStatus.METHOD_NOT_ALLOWED);
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
+	public boolean submitPO(PurchaseOrder po) {
+		ClientResponse response = createPurchaseOrderResource(po);
+		return (response.getStatus() == ClientResponse.Status.CREATED
+				.getStatusCode());
+	}
+
+
+	private ClientResponse createPurchaseOrderResource(PurchaseOrder po) {
+		String DOMAIN_URL = "http://rentit4.herokuapp.com/";
+
+		Client client = Client.create();
+		WebResource webResource = client.resource(DOMAIN_URL
+				+ "rest/purchaseorders");
+
+		PurchaseOrderResource por = new PurchaseOrderResource();
+
+		por.setExternalID(po.getId().toString());
+		por.setPlantID(po.getPlantHireRequest().getRequestedPlant().getId());
+		por.setStartDate(po.getPlantHireRequest().getStartDate());
+		por.setEndDate(po.getPlantHireRequest().getEndDate());
+		por.setConstructionSite(po.getPlantHireRequest().getConstructionSite().getName());
+		por.setSiteEngineer(po.getPlantHireRequest().getSiteEngineer().getName());
+		por.setTotalCost(po.getPlantHireRequest().getTotalCost());
+		por.setPOrecievedDate(po.getDateCreated());
+		por.setStatus(po.getStatus());
+		por.setReturnDate(po.getPlantHireRequest().getEndDate());
+
+		return webResource.type(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_XML)
+				.post(ClientResponse.class, por);
 	}
 }

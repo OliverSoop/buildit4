@@ -4,16 +4,17 @@
 package ee.ut.web;
 
 import ee.ut.domain.PlantHireRequestStatus;
-import ee.ut.model.ConstructionSite;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.RequestedPlant;
 import ee.ut.model.SiteEngineer;
+import ee.ut.repository.ConstructionSiteRepository;
 import ee.ut.web.PlantHireRequestController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,9 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect PlantHireRequestController_Roo_Controller {
+    
+    @Autowired
+    ConstructionSiteRepository PlantHireRequestController.constructionSiteRepository;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String PlantHireRequestController.create(@Valid PlantHireRequest plantHireRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -102,7 +106,7 @@ privileged aspect PlantHireRequestController_Roo_Controller {
         uiModel.addAttribute("plantHireRequest", plantHireRequest);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("planthirerequeststatuses", Arrays.asList(PlantHireRequestStatus.values()));
-        uiModel.addAttribute("constructionsites", ConstructionSite.findAllConstructionSites());
+        uiModel.addAttribute("constructionsites", constructionSiteRepository.findAll());
         uiModel.addAttribute("requestedplants", RequestedPlant.findAllRequestedPlants());
         uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());
     }
