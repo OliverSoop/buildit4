@@ -23,7 +23,7 @@ import ee.ut.rest.SupplierResource;
 @RunWith(JUnit4.class)
 public class PlantHireReqControllerTest {
 	
-	private static String DOMAIN_URL = "http://localhost:8080/BUILD_IT/";
+	private static String DOMAIN_URL = "http://buildit4.herokuapp.com/";
 	
 
     @Test

@@ -32,10 +32,13 @@ public class PlantHireReqLifeCycleTest {
 		ClientResponse response = createPlantHireRequestResource();
     	assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
     	
-    	//get
     	URI location = response.getLocation();
+    	
+    	//get
     	assertTrue(getPlantHireRequestResource(location).getStatus() == ClientResponse.Status.OK.getStatusCode());
     	
+    	//accept
+    	assertTrue(acceptPlantHireRequestResource(location).getStatus() == ClientResponse.Status.OK.getStatusCode());
     	
 	
 	}
@@ -72,10 +75,18 @@ public class PlantHireReqLifeCycleTest {
 	}
 	
 	private ClientResponse getPlantHireRequestResource(URI location) {
-    	Client client = Client.create();
+		Client client = Client.create();
     	WebResource webResource = client.resource(location);
     	return webResource.type(MediaType.APPLICATION_XML)
 												.accept(MediaType.APPLICATION_XML)
 												.get(ClientResponse.class);
     }
+
+	private ClientResponse acceptPlantHireRequestResource(URI location){
+		Client client = Client.create();
+		WebResource webResource = client.resource(location + "/accept");
+		return webResource.type(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_XML)
+				.get(ClientResponse.class);
+	}
 }
