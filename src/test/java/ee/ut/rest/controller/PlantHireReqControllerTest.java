@@ -66,7 +66,7 @@ public class PlantHireReqControllerTest {
     		}
     	}
     }
-    
+      
     private ClientResponse getPlantHireRequestResource(URI location) {
     	Client client = Client.create();
     	WebResource webResource = client.resource(location);

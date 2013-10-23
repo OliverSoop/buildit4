@@ -69,3 +69,5 @@ perform tests
 repository jpa --interface ~.repository.PurchaseOrderRepository --entity ~.model.PurchaseOrder
 repository jpa --interface ~.repository.ConstructionSiteRepository --entity ~.model.ConstructionSite
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-23 15:12:17
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-23 17:21:47
+perform tests
