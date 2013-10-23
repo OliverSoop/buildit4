@@ -25,7 +25,7 @@ import ee.ut.rest.SupplierResource;
 public class PlantHireReqLifeCycleTest {
 	
 	private static String B_DOMAIN_URL = "http://buildit4.herokuapp.com/";
-	private static String R_DOMAIN_URL = "http:/rentit4.herokuapp.com/";
+	private static String R_DOMAIN_URL = "http://rentit4.herokuapp.com/";
 
 	@Test
 	public void testPlantHireReqLifeCycle(){
