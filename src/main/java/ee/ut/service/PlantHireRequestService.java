@@ -1,7 +1,5 @@
 package ee.ut.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +19,21 @@ public class PlantHireRequestService {
 	private ConstructionSiteRepository csRep;
 
 	public PlantHireRequest createPHR(PlantHireRequestResource phr) throws ConstructionSiteNotFoundException {
-		List<ConstructionSite> csSites = csRep.findByNameAndLocation(phr.getConstructionSite().getName(), phr.getConstructionSite().getLocation());
-		if (!csSites.isEmpty()) {
+//		List<ConstructionSite> csSites = csRep.findByNameAndLocation(phr.getConstructionSite().getName(), phr.getConstructionSite().getLocation());
+//		if (!csSites.isEmpty()) {
 			PlantHireRequest plantHireRequest = new PlantHireRequest();
 			plantHireRequest.setStartDate(phr.getStartDate());
 			plantHireRequest.setEndDate(phr.getEndDate());
 			plantHireRequest.setTotalCost(phr.getTotalCost());
 			plantHireRequest.setStatus(PlantHireRequestStatus.PENDING_CONFIRMATION);
-			plantHireRequest.setConstructionSite(csSites.get(0));
+//			plantHireRequest.setConstructionSite(csSites.get(0));
+			
+			ConstructionSite site = new ConstructionSite();
+			site.setName(phr.getConstructionSite().getName());
+			site.setLocation(phr.getConstructionSite().getLocation());
+			site.persist();
+			
+			plantHireRequest.setConstructionSite(site);
 			
 			//TODO SiteEngineer should be retrieved from DB as well
 			SiteEngineer siteEngineer = new SiteEngineer();
@@ -53,9 +58,9 @@ public class PlantHireRequestService {
 			
 			plantHireRequest.persist();
 			return plantHireRequest;
-		} else {
-			throw new ConstructionSiteNotFoundException("Construction site not found");
-		}
+//		} else {
+//			throw new ConstructionSiteNotFoundException("Construction site not found");
+//		}
 	}
 	
 	

@@ -23,7 +23,7 @@ import ee.ut.rest.SupplierResource;
 @RunWith(JUnit4.class)
 public class PlantHireReqControllerTest {
 	
-	private static String DOMAIN_URL = "http://buildit4.herokuapp.com/";
+	private static String DOMAIN_URL = "http://localhost:8080/BUILD_IT/";
 	
 
     @Test
@@ -35,14 +35,13 @@ public class PlantHireReqControllerTest {
     @Test
     public void testDeletePHR() {
     	ClientResponse response = createPlantHireRequestResource();
-    	URI uri = response.getLocation();
 
     	Client client = Client.create();
-    	WebResource webResource = client.resource(uri);
+    	WebResource webResource = client.resource(response.getLocation().toString() + "/cancel");
     	ClientResponse deleteResponse = webResource.type(MediaType.APPLICATION_XML)
 										.accept(MediaType.APPLICATION_XML)
 										.delete(ClientResponse.class);
-    	assertTrue(deleteResponse.getStatus() == ClientResponse.Status.NO_CONTENT.getStatusCode());
+    	assertTrue(deleteResponse.getStatus() == ClientResponse.Status.OK.getStatusCode());
     }
     
     @Test
