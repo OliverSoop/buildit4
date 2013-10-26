@@ -34,4 +34,12 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.dateCreated = dateCreated;
     }
     
+    public String PurchaseOrder.getExternalID() {
+        return this.ExternalID;
+    }
+    
+    public void PurchaseOrder.setExternalID(String ExternalID) {
+        this.ExternalID = ExternalID;
+    }
+    
 }

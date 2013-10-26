@@ -9,6 +9,9 @@ import java.util.Collections;
 import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -201,7 +204,6 @@ public class PlantHireReqController {
 				po.setPlantHireRequest(phr);
 				po.setStatus(PurchaseOrderStatus.CREATED);
 				po.setDateCreated(new Date());
-				po.persist();
 				
 				if(submitPO(po)){
 					return new ResponseEntity<Void>(HttpStatus.OK);
@@ -215,6 +217,18 @@ public class PlantHireReqController {
 	
 	public boolean submitPO(PurchaseOrder po) {
 		ClientResponse response = createPurchaseOrderResource(po);
+
+		JAXBContext context;
+		try {
+			context = JAXBContext.newInstance(PurchaseOrderResource.class);
+			Unmarshaller um = context.createUnmarshaller();
+			PurchaseOrderResource por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
+			po.setExternalID(por.getId().toString());
+			po.persist();
+		} catch (JAXBException e) {
+			// TODO add code to this part
+		}
+		
 		return (response.getStatus() == ClientResponse.Status.CREATED
 				.getStatusCode());
 	}

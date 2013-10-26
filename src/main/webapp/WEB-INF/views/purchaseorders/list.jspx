@@ -7,6 +7,7 @@
             <table:column id="c_ee_ut_model_PurchaseOrder_status" property="status" z="lAZ0mD4ZCWAD82OnVZdssuSyRtA="/>
             <table:column id="c_ee_ut_model_PurchaseOrder_plantHireRequest" property="plantHireRequest" z="560FA1c0+TULzdEwgKluoUfXw7k="/>
             <table:column date="true" dateTimePattern="${purchaseOrder_datecreated_date_format}" id="c_ee_ut_model_PurchaseOrder_dateCreated" property="dateCreated" z="Opl2PMUlrTL2Rk2x/hub5AuKYmM="/>
+            <table:column id="c_ee_ut_model_PurchaseOrder_ExternalID" property="externalID" z="eM4sx347cFRvf87RRB4YTPu3E2Y="/>
         </table:table>
     </page:list>
 </div>

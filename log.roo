@@ -69,3 +69,16 @@ perform tests
 repository jpa --interface ~.repository.PurchaseOrderRepository --entity ~.model.PurchaseOrder
 repository jpa --interface ~.repository.ConstructionSiteRepository --entity ~.model.ConstructionSite
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-23 15:12:17
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-23 15:39:42
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-26 13:09:48
+// [failed] focus --class ~.PurchaseOrder
+// [failed] field number --fieldName ExternalID --type int
+// [failed] field number --fieldName ExternalID --type int
+// [failed] field number --fieldName ExternalID --type integer
+// [failed] field number --fieldName ExternalID --type java.lang.int
+// [failed] field number --fieldName ExternalID --type java.lang.Integer
+// [failed] field number --fieldName ExternalID --type java.lang.Int
+// [failed] field string --fieldName ExternalID
+// [failed] focus --class ~.domain.model.PurchaseOrder
+focus --class ~.model.PurchaseOrder
+field string --fieldName ExternalID
