@@ -35,14 +35,13 @@ public class PlantHireReqControllerTest {
     @Test
     public void testDeletePHR() {
     	ClientResponse response = createPlantHireRequestResource();
-    	URI uri = response.getLocation();
 
     	Client client = Client.create();
-    	WebResource webResource = client.resource(uri);
+    	WebResource webResource = client.resource(response.getLocation().toString() + "/cancel");
     	ClientResponse deleteResponse = webResource.type(MediaType.APPLICATION_XML)
 										.accept(MediaType.APPLICATION_XML)
 										.delete(ClientResponse.class);
-    	assertTrue(deleteResponse.getStatus() == ClientResponse.Status.NO_CONTENT.getStatusCode());
+    	assertTrue(deleteResponse.getStatus() == ClientResponse.Status.OK.getStatusCode());
     }
     
     @Test
@@ -66,7 +65,7 @@ public class PlantHireReqControllerTest {
     		}
     	}
     }
-    
+      
     private ClientResponse getPlantHireRequestResource(URI location) {
     	Client client = Client.create();
     	WebResource webResource = client.resource(location);

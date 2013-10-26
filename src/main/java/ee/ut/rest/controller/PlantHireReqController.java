@@ -180,7 +180,7 @@ public class PlantHireReqController {
 	}
 	
 	@RequestMapping
-	(method = RequestMethod.GET, value ="/{id}/reject")
+	(method = RequestMethod.DELETE, value ="/{id}/reject")
 	public ResponseEntity<Void> rejectPHR(@PathVariable Long id) {
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
 		if (phr != null) {
@@ -194,7 +194,7 @@ public class PlantHireReqController {
 	}
 	
 	@RequestMapping
-	(method = RequestMethod.GET, value ="/{id}/accept")
+	(method = RequestMethod.POST, value ="/{id}/accept")
 	public ResponseEntity<Void> acceptPHR(@PathVariable Long id) {
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
 		if (phr != null) {
@@ -254,6 +254,7 @@ public class PlantHireReqController {
 		por.setStatus(po.getStatus());
 		por.setReturnDate(po.getPlantHireRequest().getEndDate());
 
+		
 		return webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML)
 				.post(ClientResponse.class, por);
