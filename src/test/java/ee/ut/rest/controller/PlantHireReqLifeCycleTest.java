@@ -30,6 +30,7 @@ import ee.ut.rest.SupplierResource;
 public class PlantHireReqLifeCycleTest {
 	
 	private static String DOMAIN_URL = "http://localhost:8080/BUILD_IT/";
+	private static String DOMAIN_URL2 = "http://rentit4.herokuapp.com/";
 
 	@Test
 	public void testPlantHireReqLifeCycle(){
@@ -43,19 +44,18 @@ public class PlantHireReqLifeCycleTest {
     	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
     		
     	//Approve the obtained Plant Hire Request and 
-    	//Obtain the Purchase Order resource (POresource) from the response of previous point.
     	response= acceptPlantHireRequestResource(location);
     	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
     	
-    	//Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.
-    	location = response.getLocation();
-    	assertNotNull(location);
-    	//response = null;
-//    	response= getPOResource(location);
-//    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
+    	//Obtain the Purchase Order resource (POresource) from the response of previous point.
+    	PurchaseOrderResource por = getReturnedPOResource(response);
     	
+    	//Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.
+    	response= getPOResource(por.getId().toString());
+    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
     	//Assert that the representation obtained in previous point is not null
-    	//assertNotNull(response);
+    	assertNotNull(response);
+    	
 	}
 	
 	private ClientResponse createPlantHireRequestResource(){
@@ -106,12 +106,30 @@ public class PlantHireReqLifeCycleTest {
 				.post(ClientResponse.class);
 	}
 
-	private ClientResponse getPOResource(URI location){
-	
+	private ClientResponse getPOResource(String por_Id){
+		
 		Client client = Client.create();
-    	WebResource webResource = client.resource(location);
+    	WebResource webResource = client.resource(DOMAIN_URL2 + "rest/purchaseorders/" + por_Id);
+	
     	return webResource.type(MediaType.APPLICATION_XML)
 												.accept(MediaType.APPLICATION_XML)
 												.get(ClientResponse.class);
+	}
+	
+	private PurchaseOrderResource getReturnedPOResource(ClientResponse response){
+		
+		JAXBContext context;
+		PurchaseOrderResource por = null;
+		try {
+			context = JAXBContext.newInstance(PurchaseOrderResource.class);
+			Unmarshaller um = context.createUnmarshaller();
+			por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
+			//po.setExternalID(por.getId().toString());
+		} catch (JAXBException e) {
+			// TODO add code to this part
+		}
+		
+		return por;
+		
 	}
 }
