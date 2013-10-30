@@ -29,7 +29,7 @@ import ee.ut.rest.SupplierResource;
 @RunWith(JUnit4.class)
 public class PlantHireReqLifeCycleTest {
 	
-	private static String DOMAIN_URL = "http://localhost:8080/BUILD_IT/";
+	private static String DOMAIN_URL = "http://buildit4.herokuapp.com/";
 	private static String DOMAIN_URL2 = "http://rentit4.herokuapp.com/";
 
 	@Test
@@ -124,7 +124,6 @@ public class PlantHireReqLifeCycleTest {
 			context = JAXBContext.newInstance(PurchaseOrderResource.class);
 			Unmarshaller um = context.createUnmarshaller();
 			por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
-			//po.setExternalID(por.getId().toString());
 		} catch (JAXBException e) {
 			// TODO add code to this part
 		}
