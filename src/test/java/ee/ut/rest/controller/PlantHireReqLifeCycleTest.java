@@ -43,13 +43,13 @@ public class PlantHireReqLifeCycleTest {
     	response= getPlantHireRequestResource(location);
     	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
     		
-    	//Approve the obtained Plant Hire Request and 
+    	//Approve the obtained Plant Hire Request and
     	response= acceptPlantHireRequestResource(location);
     	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
     	
     	//Obtain the Purchase Order resource (POresource) from the response of previous point.
     	PurchaseOrderResource por = getReturnedPOResource(response);
-    	
+    	assertNotNull(por);
     	//Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.
     	response= getPOResource(por.getId().toString());
     	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
