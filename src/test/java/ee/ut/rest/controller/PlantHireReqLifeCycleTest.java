@@ -6,6 +6,9 @@ import java.net.URI;
 import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +20,7 @@ import com.sun.jersey.api.client.WebResource;
 
 import ee.ut.rest.ConstructionSiteResource;
 import ee.ut.rest.PlantHireRequestResource;
+import ee.ut.rest.PurchaseOrderResource;
 import ee.ut.rest.RequestedPlantResource;
 import ee.ut.rest.SiteEngineerResource;
 import ee.ut.rest.SupplierResource;
@@ -24,34 +28,36 @@ import ee.ut.rest.SupplierResource;
 @RunWith(JUnit4.class)
 public class PlantHireReqLifeCycleTest {
 	
-	private static String B_DOMAIN_URL = "http://buildit4.herokuapp.com/";
-	private static String R_DOMAIN_URL = "http://rentit4.herokuapp.com/";
+	private static String DOMAIN_URL = "http://buildit4.herokuapp.com/";
 
 	@Test
 	public void testPlantHireReqLifeCycle(){
-		//create
+		//Create a Plant Hire Request using the RESTful service in Heroku
 		ClientResponse response = createPlantHireRequestResource();
     	assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
     	
+    	//Obtain the Plant Hire Request resource (PHRresource) from the response of previous point.
     	URI location = response.getLocation();
+    	response= getPlantHireRequestResource(location);
+    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
+    		
+    	//Approve the obtained Plant Hire Request and 
+    	//Obtain the Purchase Order resource (POresource) from the response of previous point.
+    	response= acceptPlantHireRequestResource(location);
+    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
     	
-    	//get
-    	assertTrue(getPlantHireRequestResource(location).getStatus() == ClientResponse.Status.OK.getStatusCode());
-    	
-    	//accept
-    	assertTrue(acceptPlantHireRequestResource(location).getStatus() == ClientResponse.Status.OK.getStatusCode());
-	
-    	/*TODO: Obtain the Purchase Order resource (POresource) from the response of previous point.*/
-    	
-    	/*TODO: Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.*/
+    	//Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.
+    	location = response.getLocation();
+    	response= getPOResource(location);
+    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
     	
     	/*TODO: Assert that the representation obtained in previous point is not null.*/
-    	
+    	//assertTrue(response.)
 	}
 	
 	private ClientResponse createPlantHireRequestResource(){
 		Client client = Client.create();
-    	WebResource webResource = client.resource(B_DOMAIN_URL + "/rest/phr");
+    	WebResource webResource = client.resource(DOMAIN_URL + "/rest/phr");
     	
     	PlantHireRequestResource phr = new PlantHireRequestResource();
     	phr.setStartDate(new Date());
@@ -89,6 +95,7 @@ public class PlantHireReqLifeCycleTest {
     }
 
 	private ClientResponse acceptPlantHireRequestResource(URI location){
+		
 		Client client = Client.create();
 		WebResource webResource = client.resource(location.toString() + "/accept");
 		return  webResource.type(MediaType.APPLICATION_XML)
@@ -96,11 +103,12 @@ public class PlantHireReqLifeCycleTest {
 				.post(ClientResponse.class);
 	}
 
-	private ClientResponse getPurchaseOrderResource (URI location){
+	private ClientResponse getPOResource(URI location){
+	
 		Client client = Client.create();
-		WebResource webResource = client.resource(location);
-		return webResource.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML)
-				.get(ClientResponse.class);
+    	WebResource webResource = client.resource(location);
+    	return webResource.type(MediaType.APPLICATION_XML)
+												.accept(MediaType.APPLICATION_XML)
+												.get(ClientResponse.class);
 	}
 }

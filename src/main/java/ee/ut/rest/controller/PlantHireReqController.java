@@ -195,7 +195,7 @@ public class PlantHireReqController {
 	
 	@RequestMapping
 	(method = RequestMethod.POST, value ="/{id}/accept")
-	public ResponseEntity<Void> acceptPHR(@PathVariable Long id) {
+	public ResponseEntity<PurchaseOrderResource> acceptPHR(@PathVariable Long id) {
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
 		if (phr != null) {
 			if (phr.getStatus() == PlantHireRequestStatus.PENDING_CONFIRMATION) {
@@ -204,33 +204,33 @@ public class PlantHireReqController {
 				po.setPlantHireRequest(phr);
 				po.setStatus(PurchaseOrderStatus.CREATED);
 				po.setDateCreated(new Date());
-				
-				if(submitPO(po)){
-					return new ResponseEntity<Void>(HttpStatus.OK);
+				PurchaseOrderResource por = submitPO(po);
+				if(por != null){
+					return new ResponseEntity<PurchaseOrderResource>(por,HttpStatus.OK);
 				}
-				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<PurchaseOrderResource>(HttpStatus.BAD_REQUEST);
 			}
-			return new ResponseEntity<Void>(HttpStatus.METHOD_NOT_ALLOWED);
+			return new ResponseEntity<PurchaseOrderResource>(HttpStatus.METHOD_NOT_ALLOWED);
 		}
-		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<PurchaseOrderResource>(HttpStatus.NOT_FOUND);
 	}
 	
-	public boolean submitPO(PurchaseOrder po) {
+	public PurchaseOrderResource submitPO(PurchaseOrder po) {
 		ClientResponse response = createPurchaseOrderResource(po);
 
 		JAXBContext context;
+		PurchaseOrderResource por = null;
 		try {
 			context = JAXBContext.newInstance(PurchaseOrderResource.class);
 			Unmarshaller um = context.createUnmarshaller();
-			PurchaseOrderResource por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
+			por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
 			po.setExternalID(por.getId().toString());
 			po.persist();
 		} catch (JAXBException e) {
 			// TODO add code to this part
 		}
 		
-		return (response.getStatus() == ClientResponse.Status.CREATED
-				.getStatusCode());
+		return por;
 	}
 
 
