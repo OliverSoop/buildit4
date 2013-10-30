@@ -3,12 +3,14 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -19,6 +21,10 @@ import ee.ut.rest.PlantHireRequestResource;
 import ee.ut.rest.RequestedPlantResource;
 import ee.ut.rest.SiteEngineerResource;
 import ee.ut.rest.SupplierResource;
+import ee.ut.soap.client.PlantResource;
+import ee.ut.soap.client.PlantResourceList;
+import ee.ut.soap.client.PlantSOAPService;
+import ee.ut.soap.client.PlantSOAPServiceService;
 
 @RunWith(JUnit4.class)
 public class PlantHireReqControllerTest {
