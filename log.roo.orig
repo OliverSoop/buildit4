@@ -82,7 +82,6 @@ repository jpa --interface ~.repository.ConstructionSiteRepository --entity ~.mo
 // [failed] focus --class ~.domain.model.PurchaseOrder
 focus --class ~.model.PurchaseOrder
 field string --fieldName ExternalID
-<<<<<<< HEAD
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-30 20:30:14
 perform tests
 perform tests
@@ -96,30 +95,41 @@ perform tests
 perform tests
 perform tests
 perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-30 23:11:56
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-30 23:32:08
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-30 23:35:58
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+<<<<<<< HEAD
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 09:26:27
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 10:16:42
+perform tests
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 10:20:41
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 12:20:37
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 13:58:07
 =======
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-29 16:38:00
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-29 17:11:42
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-29 18:28:24
-// [failed] test integration --entity ~.ee.ut.RequestedPlant
-// [failed] test integration --entity ~.ee.ut.RequestedPlant
-// [failed] test integration --entity ~.ee.ut.model.RequestedPlant
-development mode
-// [failed] test integration --entity ~.ee.ut.model.RequestedPlant
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-29 19:46:59
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-29 19:47:08
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-29 19:51:49
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-29 19:51:58
-test integration --entity ~.model.RequestedPlant
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-29 20:20:16
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-29 20:20:31
-perform test
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-29 20:22:29
-perform tests
-perform tests
-perform tests
-test integration --entity ~.model.RequestedPlant
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-29 22:30:15
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-30 16:05:49
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-30 18:18:30
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-30 19:21:38
->>>>>>> c033a46fb75456678d707b5bc426630efa71b2e0
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:23:07
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 18:39:00
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:39:15
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 18:44:12
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:52:40
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 19:02:14
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 19:24:45
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 19:31:24
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 19:40:11
+>>>>>>> 8ce15a59c15d3061d78d01f7335241f807682264
