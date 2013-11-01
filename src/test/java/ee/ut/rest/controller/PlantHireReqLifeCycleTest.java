@@ -29,7 +29,7 @@ import ee.ut.rest.SupplierResource;
 @RunWith(JUnit4.class)
 public class PlantHireReqLifeCycleTest {
 	
-	private static String DOMAIN_URL = "http://buildit4.herokuapp.com/";
+	private static String DOMAIN_URL = "http://localhost:8080/BUILD_IT/";
 	private static String DOMAIN_URL2 = "http://rentit4.herokuapp.com/";
 
 	@Test
@@ -50,11 +50,11 @@ public class PlantHireReqLifeCycleTest {
     	//Obtain the Purchase Order resource (POresource) from the response of previous point.
     	PurchaseOrderResource por = getReturnedPOResource(response);
     	assertNotNull(por);
-    	//Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.
-    	response= getPOResource(por.getId().toString());
-    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
-    	//Assert that the representation obtained in previous point is not null
-    	assertNotNull(response);
+//    	//Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.
+//    	response= getPOResource(por.getId().toString());
+//    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
+//    	//Assert that the representation obtained in previous point is not null
+//    	assertNotNull(response);
     	
 	}
 	
@@ -123,6 +123,7 @@ public class PlantHireReqLifeCycleTest {
 		try {
 			context = JAXBContext.newInstance(PurchaseOrderResource.class);
 			Unmarshaller um = context.createUnmarshaller();
+			System.out.println(response.getEntity(String.class));
 			por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
 		} catch (JAXBException e) {
 			// TODO add code to this part

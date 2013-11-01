@@ -1,4 +1,4 @@
-package ut.ee.util;
+package ee.ut.util;
 
 import java.util.Date;
 import javax.xml.bind.annotation.adapters.XmlAdapter;

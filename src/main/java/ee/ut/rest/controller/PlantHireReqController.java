@@ -3,6 +3,7 @@ package ee.ut.rest.controller;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+import java.awt.print.Printable;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.Collections;
@@ -149,7 +150,7 @@ public class PlantHireReqController {
 	}
 	
 	@RequestMapping
-	(method = RequestMethod.GET, value ="/{id}")
+	(method = RequestMethod.GET, value ="{id}")
 	public ResponseEntity<PlantHireRequestResource> getPlantHireRequest(@PathVariable Long id) throws NoSuchMethodException, SecurityException {
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
 		if (phr != null) {
@@ -204,6 +205,7 @@ public class PlantHireReqController {
 				po.setPlantHireRequest(phr);
 				po.setStatus(PurchaseOrderStatus.CREATED);
 				po.setDateCreated(new Date());
+				po.persist();
 				PurchaseOrderResource por = submitPO(po);
 				if(por != null){
 					return new ResponseEntity<PurchaseOrderResource>(por,HttpStatus.OK);
@@ -223,6 +225,8 @@ public class PlantHireReqController {
 		try {
 			context = JAXBContext.newInstance(PurchaseOrderResource.class);
 			Unmarshaller um = context.createUnmarshaller();
+			String por2 = response.getEntity(String.class);
+			System.out.print(por2);
 			por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
 			po.setExternalID(por.getId().toString());
 			po.persist();

@@ -4,6 +4,7 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import ee.ut.model.PlantHireRequest;
 import ee.ut.rest.controller.PlantHireReqController;
+import ee.ut.soap.client.PlantResource;
 
 public class PlantHireRequestResourceAssembler extends ResourceAssemblerSupport<PlantHireRequest, PlantHireRequestResource>{
 	
@@ -40,7 +41,18 @@ public class PlantHireRequestResourceAssembler extends ResourceAssemblerSupport<
 
 	@Override
 	public PlantHireRequestResource toResource(PlantHireRequest phr) {
-		// TODO Auto-generated method stub
+		PlantHireRequestResource phrr = createResourceWithId(phr.getId(), phr);
+		phrr.setStartDate(phr.getStartDate());
+		phrr.setEndDate(phr.getEndDate());
+		phrr.setTotalCost(phr.getTotalCost());
+		
+		//vaja teha veel
+		if (phr.getRequestedPlant()!=null){
+			
+			RequestedPlantResource rpr;
+			
+		}
+		
 		return null;
 	}
 }
