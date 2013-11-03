@@ -3,10 +3,10 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_ee_ut_model_PurchaseOrder" modelAttribute="purchaseOrder" path="/purchaseorders" render="${empty dependencies}" z="knPhCYgvArmL5SzYhniBotuKskY=">
-        <field:select field="status" id="c_ee_ut_model_PurchaseOrder_status" items="${purchaseorderstatuses}" path="purchaseorderstatuses" z="o3EboiMcDblzXd2E3iE1H1rmPlU="/>
         <field:select field="plantHireRequest" id="c_ee_ut_model_PurchaseOrder_plantHireRequest" itemValue="id" items="${planthirerequests}" path="/planthirerequests" z="j7YNgKx7Adodk3to0LnHnlvjFEw="/>
         <field:datetime dateTimePattern="${purchaseOrder_datecreated_date_format}" field="dateCreated" id="c_ee_ut_model_PurchaseOrder_dateCreated" z="1ZBFzgFStpQnBGjN5rR26EJE9C8="/>
         <field:input field="ExternalID" id="c_ee_ut_model_PurchaseOrder_ExternalID" z="D2dkhoVqIM4Z7+pzNz9/8V3ByGQ="/>
+        <field:select field="status" id="c_ee_ut_model_PurchaseOrder_status" items="${purchaseorderstatuses}" path="purchaseorderstatuses" z="o3EboiMcDblzXd2E3iE1H1rmPlU="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_ee_ut_model_PurchaseOrder" render="${not empty dependencies}" z="e92cPDHZqclsb7jq0SMbQPnO5Z8="/>
 </div>

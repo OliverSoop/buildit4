@@ -3,9 +3,9 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_ee_ut_model_PurchaseOrder" object="${purchaseorder}" path="/purchaseorders" z="t8KVMC/jN/Le69YC88LVDfix4yw=">
-        <field:display field="status" id="s_ee_ut_model_PurchaseOrder_status" object="${purchaseorder}" z="/BqtaQ4nzmRrIIKKmMAPdzPears="/>
         <field:display field="plantHireRequest" id="s_ee_ut_model_PurchaseOrder_plantHireRequest" object="${purchaseorder}" z="M4JuseTeu5CZIaOMC9nkxGgFwcE="/>
         <field:display date="true" dateTimePattern="${purchaseOrder_datecreated_date_format}" field="dateCreated" id="s_ee_ut_model_PurchaseOrder_dateCreated" object="${purchaseorder}" z="vx6gP2iKRHhZ8XRM2arVX8RoWos="/>
         <field:display field="externalID" id="s_ee_ut_model_PurchaseOrder_ExternalID" object="${purchaseorder}" z="cVGfIV+MJ9nH5Eb3FzNfwWrYxZY="/>
+        <field:display field="status" id="s_ee_ut_model_PurchaseOrder_status" object="${purchaseorder}" z="/BqtaQ4nzmRrIIKKmMAPdzPears="/>
     </page:show>
 </div>

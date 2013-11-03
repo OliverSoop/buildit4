@@ -1,5 +1,7 @@
 <aspectj>
 <aspects>
+<aspect name="ee.ut.model.RequestedPlantDataOnDemand_Roo_DataOnDemand"/>
+<aspect name="ee.ut.model.RequestedPlantDataOnDemand_Roo_Configurable"/>
 </aspects>
 </aspectj>
 
