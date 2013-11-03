@@ -3,16 +3,12 @@ package ee.ut.rest.controller;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
-import java.awt.print.Printable;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -73,11 +69,10 @@ public class PlantHireReqController {
 	
 	@RequestMapping
 	(method = RequestMethod.POST, value ="/{id}")
-	public ResponseEntity<Void> updatePlantHireRequest(@RequestBody PlantHireRequestResource phr, @PathVariable Long id) {
+	public ResponseEntity<Void> updatePHR(@RequestBody PlantHireRequestResource phr, @PathVariable Long id) {
 		PlantHireRequest phrToBeChanged = PlantHireRequest.findPlantHireRequest(id);
 		if (phrToBeChanged != null) {
-			if (phrToBeChanged.getStatus() == PlantHireRequestStatus.PENDING_CONFIRMATION ||
-					phrToBeChanged.getStatus() == PlantHireRequestStatus.REJECTED) {
+			if (phrToBeChanged.getStatus() == PlantHireRequestStatus.REJECTED) {
 				PlantHireRequest plantHireRequest = phrToBeChanged;
 				plantHireRequest.setStartDate(phr.getStartDate());
 				plantHireRequest.setEndDate(phr.getEndDate());
@@ -104,9 +99,65 @@ public class PlantHireReqController {
 				
 				Supplier supplier = new Supplier();
 				supplier.setName(requestedPlant.getSupplier().getName());
+				supplier.persist();
 				plant.setSupplier(supplier);
+				plant.persist();
 				
 				plantHireRequest.setRequestedPlant(plant);
+				plantHireRequest.persist();
+				
+				HttpHeaders headers = new HttpHeaders();
+				URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().
+						 build().toUri();
+				headers.setLocation(location);
+				ResponseEntity<Void> response = new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+				return response;
+				
+			}
+			
+			return new ResponseEntity<Void>(HttpStatus.METHOD_NOT_ALLOWED);
+		}
+		 
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping
+	(method = RequestMethod.POST, value ="/{id}/modify")
+	public ResponseEntity<Void> modifyPHR(@RequestBody PlantHireRequestResource phr, @PathVariable Long id) {
+		PlantHireRequest phrToBeChanged = PlantHireRequest.findPlantHireRequest(id);
+		if (phrToBeChanged != null) {
+			if (phrToBeChanged.getStatus() == PlantHireRequestStatus.PENDING_CONFIRMATION) {
+				PlantHireRequest plantHireRequest = phrToBeChanged;
+				plantHireRequest.setStartDate(phr.getStartDate());
+				plantHireRequest.setEndDate(phr.getEndDate());
+				plantHireRequest.setTotalCost(phr.getTotalCost());
+				
+				ConstructionSite constructionSite = new ConstructionSite();
+				constructionSite.setLocation(phr.getConstructionSite().getLocation());
+				constructionSite.setName(phr.getConstructionSite().getName());
+				constructionSite.persist();
+				
+				SiteEngineer siteEngineer = new SiteEngineer();
+				siteEngineer.setName(phr.getSiteEngineer().getName());
+				constructionSite.setSiteEngineers(Collections.singleton(siteEngineer));
+				siteEngineer.persist();
+				
+				plantHireRequest.setConstructionSite(constructionSite);
+				plantHireRequest.setSiteEngineer(siteEngineer);
+				
+				RequestedPlantResource requestedPlant = phr.getRequestedPlant();
+				RequestedPlant plant = new RequestedPlant();
+				plant.setDescription(requestedPlant.getDescription());
+				plant.setExternalId(requestedPlant.getExternalId());
+				
+				Supplier supplier = new Supplier();
+				supplier.setName(requestedPlant.getSupplier().getName());
+				supplier.persist();
+				plant.setSupplier(supplier);
+				plant.persist();
+				
+				plantHireRequest.setRequestedPlant(plant);
+				plantHireRequest.persist();
 				
 				HttpHeaders headers = new HttpHeaders();
 				URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().
@@ -157,24 +208,34 @@ public class PlantHireReqController {
 			PlantHireRequestResourceAssembler assembler = new PlantHireRequestResourceAssembler();
 			PlantHireRequestResource plantHireRequest = assembler.toResource(phr);
 			
+			Method method3 = PlantHireReqController.class.getMethod("cancelPHR", Long.class);
+			String link3 = linkTo(method3, phr.getId()).toUri().toString();
+			plantHireRequest.add(new ExtendedLink(link3, "cancelPHR", "DELETE"));
 			
 			switch (phr.getStatus()) {
 				case PENDING_CONFIRMATION:
 					Method method1 = PlantHireReqController.class.getMethod("rejectPHR", Long.class);
 					String link1 = linkTo(method1, phr.getId()).toUri().toString();
-					plantHireRequest.add(new ExtendedLink(link1, "rejectPHR", "DELETE"));
+					ExtendedLink l = new ExtendedLink(link1, "rejectPHR", "DELETE");
+					plantHireRequest.add(l);
 					Method method2 = PlantHireReqController.class.getMethod("acceptPHR", Long.class);
 					String link2 = linkTo(method2, phr.getId()).toUri().toString();
 					plantHireRequest.add(new ExtendedLink(link2, "acceptPHR", "POST"));
+					Method method5 = PlantHireReqController.class.getMethod("modifyPHR", PlantHireRequestResource.class, Long.class);
+					String link5 = linkTo(method5, phr.getId()).toUri().toString();
+					plantHireRequest.add(new ExtendedLink(link5, "modifyPHR", "POST"));
+					break;
 				case REJECTED:
-				case OPEN:
-					Method method3 = PlantHireReqController.class.getMethod("cancelPHR", Long.class);
-					String link3 = linkTo(method3, phr.getId()).toUri().toString();
-					plantHireRequest.add(new ExtendedLink(link3, "cancelPHR", "DELETE"));
+					Method method4 = PlantHireReqController.class.getMethod("updatePHR", PlantHireRequestResource.class, Long.class);
+					String link4 = linkTo(method4, phr.getId()).toUri().toString();
+					plantHireRequest.add(new ExtendedLink(link4, "updatePHR", "POST"));
 					break;
 				default:
 				
 			}
+//			for (ExtendedLink l : plantHireRequest.get_links()) {
+//				plantHireRequest.getLinks()add(l);
+//			}
 			return new ResponseEntity<PlantHireRequestResource>(plantHireRequest, HttpStatus.OK);
 		}
 		return new ResponseEntity<PlantHireRequestResource>(HttpStatus.NOT_FOUND);
@@ -208,7 +269,7 @@ public class PlantHireReqController {
 				po.persist();
 				PurchaseOrderResource por = submitPO(po);
 				if(por != null){
-					return new ResponseEntity<PurchaseOrderResource>(por,HttpStatus.OK);
+					return new ResponseEntity<PurchaseOrderResource>(por, HttpStatus.OK);
 				}
 				return new ResponseEntity<PurchaseOrderResource>(HttpStatus.BAD_REQUEST);
 			}
@@ -220,21 +281,9 @@ public class PlantHireReqController {
 	public PurchaseOrderResource submitPO(PurchaseOrder po) {
 		ClientResponse response = createPurchaseOrderResource(po);
 
-		JAXBContext context;
-		PurchaseOrderResource por = null;
-		try {
-			context = JAXBContext.newInstance(PurchaseOrderResource.class);
-			Unmarshaller um = context.createUnmarshaller();
-			String por2 = response.getEntity(String.class);
-			System.out.print(por2);
-			por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
-			po.setExternalID(por.getId().toString());
-			po.persist();
-		} catch (JAXBException e) {
-			// TODO add code to this part
-		}
+		PurchaseOrderResource rs = response.getEntity(PurchaseOrderResource.class);
 		
-		return por;
+		return rs;
 	}
 
 
@@ -248,7 +297,7 @@ public class PlantHireReqController {
 		PurchaseOrderResource por = new PurchaseOrderResource();
 
 		por.setExternalID(po.getId().toString());
-		por.setPlantID(po.getPlantHireRequest().getRequestedPlant().getId());
+		por.setPlantID(Long.valueOf(po.getPlantHireRequest().getRequestedPlant().getExternalId()));
 		por.setStartDate(po.getPlantHireRequest().getStartDate());
 		por.setEndDate(po.getPlantHireRequest().getEndDate());
 		por.setConstructionSite(po.getPlantHireRequest().getConstructionSite().getName());

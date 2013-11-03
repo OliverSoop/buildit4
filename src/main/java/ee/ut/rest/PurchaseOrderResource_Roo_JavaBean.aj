@@ -57,11 +57,11 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.SiteEngineer = SiteEngineer;
     }
     
-    public Float PurchaseOrderResource.getTotalCost() {
+    public double PurchaseOrderResource.getTotalCost() {
         return this.totalCost;
     }
     
-    public void PurchaseOrderResource.setTotalCost(Float totalCost) {
+    public void PurchaseOrderResource.setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
     

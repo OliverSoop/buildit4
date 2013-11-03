@@ -1,19 +1,17 @@
 package ee.ut.rest.controller;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
 import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.springframework.hateoas.Link;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -21,6 +19,7 @@ import com.sun.jersey.api.client.WebResource;
 
 import ee.ut.rest.ConstructionSiteResource;
 import ee.ut.rest.PlantHireRequestResource;
+import ee.ut.rest.PlantResource;
 import ee.ut.rest.PurchaseOrderResource;
 import ee.ut.rest.RequestedPlantResource;
 import ee.ut.rest.SiteEngineerResource;
@@ -29,7 +28,7 @@ import ee.ut.rest.SupplierResource;
 @RunWith(JUnit4.class)
 public class PlantHireReqLifeCycleTest {
 	
-	private static String DOMAIN_URL = "http://localhost:8080/BUILD_IT/";
+	private static String DOMAIN_URL = "http://buildit4.herokuapp.com/";
 	private static String DOMAIN_URL2 = "http://rentit4.herokuapp.com/";
 
 	@Test
@@ -40,21 +39,24 @@ public class PlantHireReqLifeCycleTest {
     	
     	//Obtain the Plant Hire Request resource (PHRresource) from the response of previous point.
     	URI location = response.getLocation();
-    	response= getPlantHireRequestResource(location);
+    	response = getPlantHireRequestResource(location);
     	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
-    		
+    	PlantHireRequestResource re = response.getEntity(PlantHireRequestResource.class);
+    	Link acceptLink = re.get_link("acceptPHR");
+    	
     	//Approve the obtained Plant Hire Request and
-    	response= acceptPlantHireRequestResource(location);
+    	response= acceptPlantHireRequestResource(acceptLink);
     	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
     	
     	//Obtain the Purchase Order resource (POresource) from the response of previous point.
-    	PurchaseOrderResource por = getReturnedPOResource(response);
+    	PurchaseOrderResource por = response.getEntity(PurchaseOrderResource.class);
+    	
     	assertNotNull(por);
-//    	//Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.
-//    	response= getPOResource(por.getId().toString());
-//    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
-//    	//Assert that the representation obtained in previous point is not null
-//    	assertNotNull(response);
+    	//Query the Purchase Order resource by calling the URL in the Hyperlink contained in POresource.
+    	response= getPOResource(por.get_link("self"));
+    	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
+    	//Assert that the representation obtained in previous point is not null
+    	assertNotNull(response);
     	
 	}
 	
@@ -78,7 +80,7 @@ public class PlantHireReqLifeCycleTest {
     	
     	RequestedPlantResource rpr = new RequestedPlantResource();
     	rpr.setDescription("Excavator");
-    	rpr.setExternalId("C0001");
+    	rpr.setExternalId(Long.toString(createPlant()));
     	
     	SupplierResource supplier = new SupplierResource();
     	supplier.setName("Toshiba");
@@ -97,39 +99,37 @@ public class PlantHireReqLifeCycleTest {
 												.get(ClientResponse.class);
     }
 
-	private ClientResponse acceptPlantHireRequestResource(URI location){
+	private ClientResponse acceptPlantHireRequestResource(Link location){
 		
 		Client client = Client.create();
-		WebResource webResource = client.resource(location.toString() + "/accept");
+		WebResource webResource = client.resource(location.getHref());
 		return  webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML)
 				.post(ClientResponse.class);
 	}
 
-	private ClientResponse getPOResource(String por_Id){
+	private ClientResponse getPOResource(Link porLink){
 		
 		Client client = Client.create();
-    	WebResource webResource = client.resource(DOMAIN_URL2 + "rest/purchaseorders/" + por_Id);
+    	WebResource webResource = client.resource(porLink.getHref());
 	
     	return webResource.type(MediaType.APPLICATION_XML)
 												.accept(MediaType.APPLICATION_XML)
 												.get(ClientResponse.class);
 	}
 	
-	private PurchaseOrderResource getReturnedPOResource(ClientResponse response){
-		
-		JAXBContext context;
-		PurchaseOrderResource por = null;
-		try {
-			context = JAXBContext.newInstance(PurchaseOrderResource.class);
-			Unmarshaller um = context.createUnmarshaller();
-			System.out.println(response.getEntity(String.class));
-			por = (PurchaseOrderResource) um.unmarshal(response.getEntityInputStream());
-		} catch (JAXBException e) {
-			// TODO add code to this part
-		}
-		
-		return por;
-		
+	private Long createPlant() {
+		PlantResource plantResource = new PlantResource();
+		plantResource.setCostPerDay(2.0d);
+		plantResource.setDescription("Excavator");
+		plantResource.setName("Excavator");
+		Client client = Client.create();
+    	WebResource webResource = client.resource(DOMAIN_URL2 + "rest/plant/");
+    	
+    	ClientResponse res = webResource.type(MediaType.APPLICATION_XML)
+					.accept(MediaType.APPLICATION_XML)
+					.post(ClientResponse.class, plantResource);
+    	URI path = res.getLocation();
+    	return Long.valueOf(path.getRawPath().substring(path.getRawPath().lastIndexOf('/') + 1));
 	}
 }

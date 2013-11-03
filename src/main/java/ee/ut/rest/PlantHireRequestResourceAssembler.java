@@ -4,7 +4,6 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import ee.ut.model.PlantHireRequest;
 import ee.ut.rest.controller.PlantHireReqController;
-import ee.ut.soap.client.PlantResource;
 
 public class PlantHireRequestResourceAssembler extends ResourceAssemblerSupport<PlantHireRequest, PlantHireRequestResource>{
 	
@@ -45,12 +44,19 @@ public class PlantHireRequestResourceAssembler extends ResourceAssemblerSupport<
 		phrr.setStartDate(phr.getStartDate());
 		phrr.setEndDate(phr.getEndDate());
 		phrr.setTotalCost(phr.getTotalCost());
+		phrr.setStatus(phr.getStatus().name());
 		
-		//vaja teha veel
 		if (phr.getRequestedPlant()!=null){
+			RequestedPlantResource rpr = new RequestedPlantResource();
+			rpr.setDescription(phr.getRequestedPlant().getDescription());
+			rpr.setExternalId(phr.getRequestedPlant().getExternalId());
+			SupplierResource supplier = new SupplierResource();
+			supplier.setName(phr.getRequestedPlant().getSupplier().getName());
+			rpr.setSupplier(supplier);
+			phrr.setRequestedPlant(rpr);
 			
-			RequestedPlantResource rpr;
-			
+			//TODO should add siteEngineer
+			return phrr;
 		}
 		
 		return null;

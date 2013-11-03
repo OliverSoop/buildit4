@@ -10,7 +10,7 @@ import ee.ut.domain.PurchaseOrderStatus;
 import ee.ut.util.ResourceSupport;
 
 @RooJavaBean
-@XmlRootElement(name = "PurchaseOrder")
+@XmlRootElement(name = "purchaseOrder")
 public class PurchaseOrderResource extends ResourceSupport {
 	
 	private String ExternalID;
@@ -19,7 +19,7 @@ public class PurchaseOrderResource extends ResourceSupport {
     private Date endDate;
 	private String ConstructionSite;
 	private String SiteEngineer;
-	private Float totalCost;
+	private double totalCost;
     private Date POrecievedDate;
     private PurchaseOrderStatus status;
     private Date returnDate;
