@@ -28,6 +28,8 @@ public class ObjectFactory {
     private final static QName _GetAvailablePlants_QNAME = new QName("http://web.soap.ut.ee/", "getAvailablePlants");
     private final static QName _GetAvailablePlantsResponse_QNAME = new QName("http://web.soap.ut.ee/", "getAvailablePlantsResponse");
     private final static QName _NotFoundException_QNAME = new QName("http://web.soap.ut.ee/", "NotFoundException");
+    private final static QName _CreatePlantResponse_QNAME = new QName("http://web.soap.ut.ee/", "createPlantResponse");
+    private final static QName _CreatePlant_QNAME = new QName("http://web.soap.ut.ee/", "createPlant");
     private final static QName _PurchaseOrder_QNAME = new QName("http://web.soap.ut.ee/", "purchaseOrder");
     private final static QName _GetAllPlantsResponse_QNAME = new QName("http://web.soap.ut.ee/", "getAllPlantsResponse");
     private final static QName _CreatePurchaseOrder_QNAME = new QName("http://web.soap.ut.ee/", "createPurchaseOrder");
@@ -99,6 +101,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CreatePlant }
+     * 
+     */
+    public CreatePlant createCreatePlant() {
+        return new CreatePlant();
+    }
+
+    /**
+     * Create an instance of {@link CreatePlantResponse }
+     * 
+     */
+    public CreatePlantResponse createCreatePlantResponse() {
+        return new CreatePlantResponse();
+    }
+
+    /**
      * Create an instance of {@link NotFoundException }
      * 
      */
@@ -156,6 +174,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://web.soap.ut.ee/", name = "NotFoundException")
     public JAXBElement<NotFoundException> createNotFoundException(NotFoundException value) {
         return new JAXBElement<NotFoundException>(_NotFoundException_QNAME, NotFoundException.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreatePlantResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.ut.ee/", name = "createPlantResponse")
+    public JAXBElement<CreatePlantResponse> createCreatePlantResponse(CreatePlantResponse value) {
+        return new JAXBElement<CreatePlantResponse>(_CreatePlantResponse_QNAME, CreatePlantResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreatePlant }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.ut.ee/", name = "createPlant")
+    public JAXBElement<CreatePlant> createCreatePlant(CreatePlant value) {
+        return new JAXBElement<CreatePlant>(_CreatePlant_QNAME, CreatePlant.class, null, value);
     }
 
     /**

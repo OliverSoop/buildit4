@@ -46,6 +46,33 @@ public interface PlantSOAPService {
 
     /**
      * 
+     * @param plant
+     * @return
+     *     returns ee.ut.soap.client.PlantResource
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "createPlant", targetNamespace = "http://web.soap.ut.ee/", className = "ee.ut.soap.client.CreatePlant")
+    @ResponseWrapper(localName = "createPlantResponse", targetNamespace = "http://web.soap.ut.ee/", className = "ee.ut.soap.client.CreatePlantResponse")
+    @Action(input = "http://web.soap.ut.ee/PlantSOAPService/createPlantRequest", output = "http://web.soap.ut.ee/PlantSOAPService/createPlantResponse")
+    public PlantResource createPlant(
+        @WebParam(name = "plant", targetNamespace = "http://web.soap.ut.ee/")
+        PlantResource plant);
+
+    /**
+     * 
+     * @return
+     *     returns ee.ut.soap.client.PlantResourceList
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllPlants", targetNamespace = "http://web.soap.ut.ee/", className = "ee.ut.soap.client.GetAllPlants")
+    @ResponseWrapper(localName = "getAllPlantsResponse", targetNamespace = "http://web.soap.ut.ee/", className = "ee.ut.soap.client.GetAllPlantsResponse")
+    @Action(input = "http://web.soap.ut.ee/PlantSOAPService/getAllPlantsRequest", output = "http://web.soap.ut.ee/PlantSOAPService/getAllPlantsResponse")
+    public PlantResourceList getAllPlants();
+
+    /**
+     * 
      * @param purchaseOrder
      * @return
      *     returns ee.ut.soap.client.PurchaseOrderResource
@@ -63,17 +90,5 @@ public interface PlantSOAPService {
         PurchaseOrderResource purchaseOrder)
         throws NotFoundException_Exception
     ;
-
-    /**
-     * 
-     * @return
-     *     returns ee.ut.soap.client.PlantResourceList
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllPlants", targetNamespace = "http://web.soap.ut.ee/", className = "ee.ut.soap.client.GetAllPlants")
-    @ResponseWrapper(localName = "getAllPlantsResponse", targetNamespace = "http://web.soap.ut.ee/", className = "ee.ut.soap.client.GetAllPlantsResponse")
-    @Action(input = "http://web.soap.ut.ee/PlantSOAPService/getAllPlantsRequest", output = "http://web.soap.ut.ee/PlantSOAPService/getAllPlantsResponse")
-    public PlantResourceList getAllPlants();
 
 }

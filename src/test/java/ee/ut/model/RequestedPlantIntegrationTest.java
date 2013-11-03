@@ -20,7 +20,7 @@ import ee.ut.soap.client.PlantSOAPServiceService;
 
 @RunWith(JUnit4.class)
 public class RequestedPlantIntegrationTest {
-
+	
 	public PlantResourceList getAllPlants(){
 	    PlantSOAPService catalog = new PlantSOAPServiceService().getPlantSOAPServicePort();
 		PlantResourceList plants = catalog.getAllPlants();
@@ -40,6 +40,7 @@ public class RequestedPlantIntegrationTest {
 	
     @Test
     public void testGetAllPlants() {
+    	createPlantResource();
     	List<PlantResource> plants = getAllPlants().getPlants();
     	String result = "";
         for(PlantResource plant : plants) {
@@ -59,7 +60,7 @@ public class RequestedPlantIntegrationTest {
     	PO.setConstructionSite("Liivi 2");
     	PO.setEndDate(xgcal);
     	PO.setExternalId("1");
-    	PO.setPlantId(01L);
+    	PO.setPlantId(createPlantResource());
     	PO.setPoRecievedDate(xgcal);
     	PO.setReturnDate(xgcal);
     	PO.setSiteEngineer("Engineer");
@@ -78,6 +79,16 @@ public class RequestedPlantIntegrationTest {
             System.out.println("Error on making date");
         }
         return xmlCalendar;
+    }
+    
+    private Long createPlantResource() {
+    	PlantSOAPService catalog = new PlantSOAPServiceService().getPlantSOAPServicePort();
+    	PlantResource plant = new PlantResource();
+    	plant.setName("Hammer");
+    	plant.setDescription("Hammer time");
+    	plant.setCostPerDay(4.5d);
+		PlantResource pr = catalog.createPlant(plant);
+		return pr.getId();
     }
 
 
