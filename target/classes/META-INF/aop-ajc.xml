@@ -38,6 +38,7 @@
 <aspect name="ee.ut.model.Engineer_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.model.SiteEngineer_Roo_Jpa_Entity"/>
+<aspect name="ee.ut.rest.InvoiceResource_Roo_JavaBean"/>
 <aspect name="ee.ut.model.SiteEngineer_Roo_Configurable"/>
 <aspect name="ee.ut.repository.PurchaseOrderRepository_Roo_Jpa_Repository"/>
 <aspect name="ee.ut.rest.PlantResource_Roo_JavaBean"/>

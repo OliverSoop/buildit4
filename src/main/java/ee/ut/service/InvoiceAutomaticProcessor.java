@@ -1,6 +1,5 @@
 package ee.ut.service;
 
-import java.io.File;
 import java.util.Date;
 
 import javax.xml.bind.JAXBContext;
@@ -10,6 +9,9 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
+
+
+import org.w3c.dom.Document;
 
 import ee.ut.rest.InvoiceResource;
 
@@ -27,18 +29,19 @@ public class InvoiceAutomaticProcessor {
 //	sending them for approval.
 	
 	@ServiceActivator
-	public MailMessage process(File invoice) throws JAXBException {
+	public MailMessage process(Document invoice) throws JAXBException {
 		
 		MailMessage mailMessage = new SimpleMailMessage();
 		JAXBContext jaxbCtx = JAXBContext.newInstance(InvoiceResource.class);
 		InvoiceResource invoiceRes = (InvoiceResource) jaxbCtx
 		.createUnmarshaller().unmarshal(invoice);
-		mailMessage.setTo("buildit4app@gmail.com");
+		mailMessage.setTo(invoiceRes.getReturnEmail());
 		mailMessage.setSentDate(new Date());
 		mailMessage.setSubject("The payment is being processed");
-		mailMessage.setText("Message here...");
+		mailMessage.setText("This is an automated message");
 		return mailMessage;
 	}
+
 
 	
 }

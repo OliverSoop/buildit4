@@ -7,10 +7,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @RooJavaBean
-@XmlRootElement(name = "constructionSite")
+@XmlRootElement(name = "invoice")
 public class InvoiceResource {
-	private String To;
-	private Date SentDate;
-	private String Subject;
-	private String Text;
+	private Float total;
+	private String purchaseOrderHRef;
+	private String returnEmail;
 }

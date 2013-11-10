@@ -6,6 +6,8 @@ import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,6 +16,8 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import ee.ut.rest.InvoiceResource;
 
 @Component
 public class InvoiceMailPreprocessor {
@@ -28,7 +32,7 @@ public class InvoiceMailPreprocessor {
 				BodyPart part = content.getBodyPart(i);
 				if (part.getContentType().startsWith("text/xml") ||
 				part.getContentType().startsWith("application/xml")) {
-					String fileName = part.getFileName();
+					String fileName = part.getFileName();					
 					if (fileName.startsWith("invoice")) {
 						DocumentBuilder builder =
 						DocumentBuilderFactory.newInstance().newDocumentBuilder();

@@ -50,23 +50,35 @@
 		<bean class="ee.ut.service.InvoiceRouter"/>
 	</int:router>
 	
-	
+	<int:channel id="outboundMailChannel2" />
 	<int:service-activator id="invoiceAutomaticProcessor" input-channel=
-		"fastTrackPath" method="process">
+		"fastTrackPath" method="process" output-channel="outboundMailChannel2">
 		<bean class="ee.ut.service.InvoiceAutomaticProcessor"/>
 	</int:service-activator>
-	<int:service-activator id="invoiceHumanAssistedHandling" input-channel=
-		"normalPath" method="process">
-		<bean class="ee.ut.service.InvoiceHumanAssistedHandling"/>
-	</int:service-activator>
+	
+	<int-mail:outbound-channel-adapter channel="outboundMailChannel2" mail-sender="mailSender2" />
+	<bean id="mailSender2"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="buildit4app@gmail.com" />
+		<property name="password" value="buildit4" />
+		<property name="javaMailProperties">
+		<props>
+		<prop key="mail.smtp.starttls.enable">true</prop>
+		<prop key="mail.smtp.auth">true</prop>
+		</props>
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+	
 	
 	<int:channel id="outboundMailChannel" />
-	<int:service-activator id="invoiceHumanAssistedHandling1" input-channel="normalPath" method="process" output-channel="outboundMailChannel">
-		<bean class="ee.ut.service.InvoiceHumanAssistedHandling" />
-	</int:service-activator>
-	
-	<int:service-activator id="invoiceHumanAssistedHandling2" input-channel="
-		normalPath" method="process" output-channel="outboundMailChannel">
+	<int:service-activator id="invoiceHumanAssistedHandling" input-channel="normalPath" method="process" output-channel="outboundMailChannel">
 		<bean class="ee.ut.service.InvoiceHumanAssistedHandling" />
 	</int:service-activator>
 	<int-mail:outbound-channel-adapter channel="outboundMailChannel" mail-sender="mailSender" />
@@ -74,7 +86,7 @@
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="buildit4app%40gmail.com" />
+		<property name="username" value="buildit4app@gmail.com" />
 		<property name="password" value="buildit4" />
 		<property name="javaMailProperties">
 		<props>
