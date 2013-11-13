@@ -13,7 +13,10 @@ import org.springframework.stereotype.Component;
 
 import org.w3c.dom.Document;
 
+import ee.ut.model.PlantHireRequest;
+import ee.ut.model.PurchaseOrder;
 import ee.ut.rest.InvoiceResource;
+import ee.ut.rest.PurchaseOrderResource;
 
 
 @Component
@@ -35,10 +38,35 @@ public class InvoiceHumanAssistedHandling {
 		JAXBContext jaxbCtx = JAXBContext.newInstance(InvoiceResource.class);
 		InvoiceResource invoiceRes = (InvoiceResource) jaxbCtx
 		.createUnmarshaller().unmarshal(invoice);
+		
+		Float invoiceTotal = invoiceRes.getTotal();
+		String POid = invoiceRes.getPurchaseOrderHRef();
+		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(Long.parseLong(POid));
+		PlantHireRequest phr = new PlantHireRequest();
+		try {
+			phr = po.getPlantHireRequest();
+		} catch (Exception e) {
+			mailMessage.setTo("buildit4app@gmail.com");
+			mailMessage.setSentDate(new Date());
+			mailMessage.setSubject("Error on invoice");
+			mailMessage.setText("Did not find PO");
+			return mailMessage;
+		}
+		
+		Float phrTotal = phr.getTotalCost();
+		
 		mailMessage.setTo("buildit4app@gmail.com");
 		mailMessage.setSentDate(new Date());
 		mailMessage.setSubject("The payment is being processed");
-		mailMessage.setText("Message here...");
+		
+		if(invoiceTotal.equals(phrTotal)){
+			mailMessage.setText("Total match, well done");
+			
+		}else{
+			mailMessage.setText("Totals dont match. Invoice total: " + invoiceTotal +
+					" and our total: " + phrTotal);
+		}
+		
 		return mailMessage;
 	}
 
