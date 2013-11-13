@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 
 import org.w3c.dom.Document;
 
+import ee.ut.domain.InvoiceStatus;
 import ee.ut.domain.PurchaseOrderStatus;
+import ee.ut.model.Invoice;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.PurchaseOrder;
 import ee.ut.rest.InvoiceResource;
@@ -39,6 +41,13 @@ public class InvoiceHumanAssistedHandling {
 		JAXBContext jaxbCtx = JAXBContext.newInstance(InvoiceResource.class);
 		InvoiceResource invoiceRes = (InvoiceResource) jaxbCtx
 		.createUnmarshaller().unmarshal(invoice);
+		
+		Invoice invoiceNew = new Invoice();
+		invoiceNew.setPurchaseOrderHRef("http://buildit4.herokuapp.com/purchaseorders/"+invoiceRes.getPurchaseOrderHRef());
+		invoiceNew.setReturnEmail(invoiceRes.getReturnEmail());
+		invoiceNew.setStatus(InvoiceStatus.DISAPPROVED);
+		invoiceNew.setTotal(invoiceRes.getTotal());
+		invoiceNew.persist();
 		
 		Float invoiceTotal = invoiceRes.getTotal();
 		String POid = invoiceRes.getPurchaseOrderHRef();

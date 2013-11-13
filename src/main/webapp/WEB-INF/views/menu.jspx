@@ -27,5 +27,9 @@
             <menu:item id="i_siteengineer_new" messageCode="global_menu_new" url="/siteengineers?form" z="73MDcGEekK1/OA5vq9yOzuGF2bw="/>
             <menu:item id="i_siteengineer_list" messageCode="global_menu_list" url="/siteengineers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="+9FMZynjARRy/GppxBem/QpLUFc="/>
         </menu:category>
+        <menu:category id="c_invoice" z="J8t31gESmLmp6i5o6ds0/j0AMNA=">
+            <menu:item id="i_invoice_new" messageCode="global_menu_new" url="/invoices?form" z="QqwPSYJNNoLrSbh5ekf/V1j0eU8="/>
+            <menu:item id="i_invoice_list" messageCode="global_menu_list" url="/invoices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="fGp1lAWegbSUAHpxuhrzXY9RQGI="/>
+        </menu:category>
     </menu:menu>
 </div>

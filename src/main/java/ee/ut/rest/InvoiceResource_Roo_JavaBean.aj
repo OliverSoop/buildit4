@@ -3,6 +3,7 @@
 
 package ee.ut.rest;
 
+import ee.ut.domain.InvoiceStatus;
 import ee.ut.rest.InvoiceResource;
 
 privileged aspect InvoiceResource_Roo_JavaBean {
@@ -29,6 +30,14 @@ privileged aspect InvoiceResource_Roo_JavaBean {
     
     public void InvoiceResource.setReturnEmail(String returnEmail) {
         this.returnEmail = returnEmail;
+    }
+    
+    public InvoiceStatus InvoiceResource.getStatus() {
+        return this.status;
+    }
+    
+    public void InvoiceResource.setStatus(InvoiceStatus status) {
+        this.status = status;
     }
     
 }
