@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import org.w3c.dom.Document;
 
+import ee.ut.domain.PurchaseOrderStatus;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.PurchaseOrder;
 import ee.ut.rest.InvoiceResource;
@@ -45,25 +46,27 @@ public class InvoiceAutomaticProcessor {
 		try {
 			phr = po.getPlantHireRequest();
 		} catch (Exception e) {
-			mailMessage.setTo("buildit4app@gmail.com");
+			mailMessage.setTo(invoiceRes.getReturnEmail());
 			mailMessage.setSentDate(new Date());
 			mailMessage.setSubject("Error on invoice");
-			mailMessage.setText("Did not find PO");
+			mailMessage.setText("Did not find PO, id: " + POid);
 			return mailMessage;
 		}
 		
+		PurchaseOrderStatus poStatus = po.getStatus();
+		
 		Float phrTotal = phr.getTotalCost();
 		
-		mailMessage.setTo("buildit4app@gmail.com");
+		mailMessage.setTo(invoiceRes.getReturnEmail());
 		mailMessage.setSentDate(new Date());
 		mailMessage.setSubject("The payment is being processed");
 		
-		if(invoiceTotal.equals(phrTotal)){
-			mailMessage.setText("Total match, well done");
+		if(invoiceTotal.equals(phrTotal) && poStatus != poStatus.PAID){
+			mailMessage.setText("Total match and it is unpaid, well done");
 			
 		}else{
-			mailMessage.setText("Totals dont match. Invoice total: " + invoiceTotal +
-					" and our total: " + phrTotal);
+			mailMessage.setText("Totals dont match or this PO is paid. Invoice total: " + invoiceTotal +
+					" and our total: " + phrTotal + ". PO status: " + poStatus);
 		}
 		
 		return mailMessage;
