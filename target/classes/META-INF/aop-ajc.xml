@@ -2,6 +2,7 @@
 <aspects>
 <aspect name="ee.ut.beans.PlantBean_Roo_JavaBean"/>
 <aspect name="ee.ut.model.PlantHireRequest_Roo_ToString"/>
+<aspect name="ee.ut.model.Invoice_Roo_ToString"/>
 <aspect name="ee.ut.beans.PlantHireRequestBean_Roo_JavaBean"/>
 <aspect name="ee.ut.model.ConstructionSite_Roo_Configurable"/>
 <aspect name="ee.ut.model.SiteEngineer_Roo_ToString"/>
@@ -9,10 +10,12 @@
 <aspect name="ee.ut.model.Engineer_Roo_JavaBean"/>
 <aspect name="ee.ut.rest.PurchaseOrderResource_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Supplier_Roo_Configurable"/>
+<aspect name="ee.ut.model.Invoice_Roo_Configurable"/>
 <aspect name="ee.ut.rest.SupplierResource_Roo_JavaBean"/>
 <aspect name="ee.ut.model.RequestedPlant_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.web.SiteEngineerController_Roo_Controller"/>
 <aspect name="ee.ut.model.ConstructionSite_Roo_ToString"/>
+<aspect name="ee.ut.model.Invoice_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.beans.PurchaseOrderBean_Roo_JavaBean"/>
 <aspect name="ee.ut.web.PlantHireRequestController_Roo_Controller"/>
 <aspect name="ee.ut.rest.ConstructionSiteResource_Roo_JavaBean"/>
@@ -23,8 +26,8 @@
 <aspect name="ee.ut.model.RequestedPlant_Roo_ToString"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Supplier_Roo_Jpa_ActiveRecord"/>
-<aspect name="ee.ut.web.RequestedPlantController_Roo_Controller"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Jpa_ActiveRecord"/>
+<aspect name="ee.ut.web.RequestedPlantController_Roo_Controller"/>
 <aspect name="ee.ut.web.PurchaseOrderController_Roo_Controller"/>
 <aspect name="ee.ut.model.Supplier_Roo_ToString"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Configurable"/>
@@ -32,6 +35,7 @@
 <aspect name="ee.ut.model.PlantHireRequest_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.web.ConstructionSiteController_Roo_Controller"/>
 <aspect name="ee.ut.web.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
+<aspect name="ee.ut.web.InvoiceController_Roo_Controller"/>
 <aspect name="ee.ut.model.RequestedPlant_Roo_Configurable"/>
 <aspect name="ee.ut.model.RequestedPlant_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Engineer_Roo_ToString"/>
@@ -47,9 +51,11 @@
 <aspect name="ee.ut.model.PlantHireRequest_Roo_JavaBean"/>
 <aspect name="ee.ut.rest.PlantResource_Roo_JavaBean"/>
 <aspect name="ee.ut.model.RequestedPlant_Roo_Jpa_ActiveRecord"/>
+<aspect name="ee.ut.model.Invoice_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.model.Supplier_Roo_JavaBean"/>
 <aspect name="ee.ut.model.ConstructionSite_Roo_JavaBean"/>
 <aspect name="ee.ut.model.PlantHireRequest_Roo_Jpa_ActiveRecord"/>
+<aspect name="ee.ut.model.Invoice_Roo_JavaBean"/>
 <aspect name="ee.ut.model.ConstructionSite_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.model.PlantHireRequest_Roo_Configurable"/>
 <aspect name="ee.ut.model.Engineer_Roo_Jpa_Entity"/>

@@ -13,6 +13,11 @@ import org.springframework.stereotype.Component;
 
 import org.w3c.dom.Document;
 
+import ee.ut.domain.InvoiceStatus;
+import ee.ut.domain.PurchaseOrderStatus;
+import ee.ut.model.Invoice;
+import ee.ut.model.PlantHireRequest;
+import ee.ut.model.PurchaseOrder;
 import ee.ut.rest.InvoiceResource;
 
 
@@ -34,11 +39,45 @@ public class InvoiceAutomaticProcessor {
 		MailMessage mailMessage = new SimpleMailMessage();
 		JAXBContext jaxbCtx = JAXBContext.newInstance(InvoiceResource.class);
 		InvoiceResource invoiceRes = (InvoiceResource) jaxbCtx
-		.createUnmarshaller().unmarshal(invoice);
+		.createUnmarshaller().unmarshal(invoice);		
+		
+		Invoice invoiceNew = new Invoice();
+		invoiceNew.setPurchaseOrderHRef("http://buildit4.herokuapp.com/purchaseorders/"+invoiceRes.getPurchaseOrderHRef());
+		invoiceNew.setReturnEmail(invoiceRes.getReturnEmail());
+		invoiceNew.setStatus(InvoiceStatus.DISAPPROVED);
+		invoiceNew.setTotal(invoiceRes.getTotal());
+		invoiceNew.persist();
+
+		Float invoiceTotal = invoiceRes.getTotal();
+		String POid = invoiceRes.getPurchaseOrderHRef();
+		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(Long.parseLong(POid));
+		PlantHireRequest phr = new PlantHireRequest();
+		try {
+			phr = po.getPlantHireRequest();
+		} catch (Exception e) {
+			mailMessage.setTo(invoiceRes.getReturnEmail());
+			mailMessage.setSentDate(new Date());
+			mailMessage.setSubject("Error on invoice");
+			mailMessage.setText("Did not find PO, id: " + POid);
+			return mailMessage;
+		}
+		
+		PurchaseOrderStatus poStatus = po.getStatus();
+		
+		Float phrTotal = phr.getTotalCost();
+		
 		mailMessage.setTo(invoiceRes.getReturnEmail());
 		mailMessage.setSentDate(new Date());
 		mailMessage.setSubject("The payment is being processed");
-		mailMessage.setText("This is an automated message");
+		
+		if(invoiceTotal.equals(phrTotal) && poStatus != poStatus.PAID){
+			mailMessage.setText("Total match and it is unpaid, well done");
+			
+		}else{
+			mailMessage.setText("Totals dont match or this PO is paid. Invoice total: " + invoiceTotal +
+					" and our total: " + phrTotal + ". PO status: " + poStatus);
+		}
+		
 		return mailMessage;
 	}
 
