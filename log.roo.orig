@@ -109,10 +109,16 @@ perform tests
 perform tests
 perform tests
 perform tests
-<<<<<<< HEAD
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 09:26:27
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 10:16:42
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:23:07
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 18:39:00
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:39:15
 perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 18:44:12
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:52:40
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 19:02:14
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 19:24:45
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 19:31:24
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 19:40:11
 perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 10:20:41
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 12:20:37
@@ -121,15 +127,90 @@ perform tests
 perform tests
 perform tests
 perform tests
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 13:58:07
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-03 13:25:40
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-03 17:16:53
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-03 17:17:13
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-05 14:19:02
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-05 14:26:12
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-05 14:29:04
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-05 15:44:00
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-05 17:08:31
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-05 18:30:33
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-05 21:40:48
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-05 22:18:46
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-06 16:11:17
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-06 18:20:53
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-10 16:31:22
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-10 18:08:10
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-10 18:10:33
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-10 18:19:27
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-10 18:21:18
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-10 18:22:37
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-10 18:22:51
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-10 18:23:14
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-10 18:23:25
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-10 18:24:12
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-10 18:30:12
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-10 18:43:19
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-10 19:02:46
+hint
+<<<<<<< HEAD
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-13 18:02:23
+web mvc controller --class ~.web.POController --preferredMapping /purchaseorders/newPO
+class --class ~.beans.PlantBean
+class --class ~.beans.PurchaseOrderBean
+class --class ~.beans.PlantHireRequestBean
 =======
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:23:07
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 18:39:00
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:39:15
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 18:44:12
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 18:52:40
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 19:02:14
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 19:24:45
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-31 19:31:24
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 19:40:11
->>>>>>> 8ce15a59c15d3061d78d01f7335241f807682264
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-10 20:51:20
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-11 11:59:00
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-11 12:37:38
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-11 12:41:38
+hint
+version
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-11 13:36:31
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-13 19:27:56
+hint
+web mvc all --package ~.web
+>>>>>>> b70045127afc3e64b4e2a5277bc6c0c150e342f1
