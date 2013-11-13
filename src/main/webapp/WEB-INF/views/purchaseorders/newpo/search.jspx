@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" 
+		xmlns:spring="http://www.springframework.org/tags" 
+		xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0"
+		xmlns:form="http://www.springframework.org/tags/form"
+		xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  	<form:form method="POST" modelAttribute="plantquery">
+  		<table>
+			<tr>
+				<field:datetime dateTimePattern="${plantHRBean_startr_date_format}"
+					field="startDate" label="Start date"
+					id="c_ut_ee_domain_PlantHR_startR" />
+			</tr>
+			<tr>
+				<field:datetime dateTimePattern="${plantHRBean_endr_date_format}"
+					field="endDate" label="End date" 
+					id="c_ut_ee_domain_PlantHR_endR" />
+			</tr>
+			<tr>
+			<input type="submit" value="Search plants" />
+			</tr>
+		</table>
+	</form:form>
+  <jsp:output omit-xml-declaration="yes"/>
+</div>

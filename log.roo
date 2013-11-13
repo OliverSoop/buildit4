@@ -195,3 +195,8 @@ perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-10 18:43:19
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-10 19:02:46
 hint
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-13 18:02:23
+web mvc controller --class ~.web.POController --preferredMapping /purchaseorders/newPO
+class --class ~.beans.PlantBean
+class --class ~.beans.PurchaseOrderBean
+class --class ~.beans.PlantHireRequestBean
