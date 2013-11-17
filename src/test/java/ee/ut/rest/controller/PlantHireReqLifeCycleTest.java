@@ -16,6 +16,7 @@ import org.springframework.hateoas.Link;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 import ee.ut.rest.ConstructionSiteResource;
 import ee.ut.rest.PlantHireRequestResource;
@@ -62,6 +63,7 @@ public class PlantHireReqLifeCycleTest {
 	
 	private ClientResponse createPlantHireRequestResource(){
 		Client client = Client.create();
+		client.addFilter(new HTTPBasicAuthFilter("provider", "admin"));
     	WebResource webResource = client.resource(DOMAIN_URL + "/rest/phr");
     	
     	PlantHireRequestResource phr = new PlantHireRequestResource();
@@ -93,6 +95,7 @@ public class PlantHireReqLifeCycleTest {
 	
 	private ClientResponse getPlantHireRequestResource(URI location) {
 		Client client = Client.create();
+		client.addFilter(new HTTPBasicAuthFilter("provider", "admin"));
     	WebResource webResource = client.resource(location);
     	return webResource.type(MediaType.APPLICATION_XML)
 												.accept(MediaType.APPLICATION_XML)
@@ -102,6 +105,7 @@ public class PlantHireReqLifeCycleTest {
 	private ClientResponse acceptPlantHireRequestResource(Link location){
 		
 		Client client = Client.create();
+		client.addFilter(new HTTPBasicAuthFilter("provider", "admin"));
 		WebResource webResource = client.resource(location.getHref());
 		return  webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML)
@@ -124,6 +128,7 @@ public class PlantHireReqLifeCycleTest {
 		plantResource.setDescription("Excavator");
 		plantResource.setName("Excavator");
 		Client client = Client.create();
+    	client.addFilter(new HTTPBasicAuthFilter("employee", "employee"));
     	WebResource webResource = client.resource(DOMAIN_URL2 + "rest/plant/");
     	
     	ClientResponse res = webResource.type(MediaType.APPLICATION_XML)

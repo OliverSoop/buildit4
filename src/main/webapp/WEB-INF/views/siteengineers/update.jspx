@@ -4,5 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_ee_ut_model_SiteEngineer" modelAttribute="siteEngineer" path="/siteengineers" versionField="Version" z="RzWRrhKOZRNSU9MSocjTni/Lg0Q=">
         <field:input field="name" id="c_ee_ut_model_SiteEngineer_name" z="cbU3IuzGyhvQ+UbKYoGYFdeCbvk="/>
+        <field:input field="email" id="c_ee_ut_model_SiteEngineer_email" validationMessageCode="field_invalid_email" z="yUnvoH4J6e6GDq8XJqYhCq7X7mQ="/>
     </form:update>
 </div>

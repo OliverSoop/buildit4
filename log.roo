@@ -439,3 +439,11 @@ web mvc scaffold --class ~.web.se.PHRSEController --path /se/phrs --backingType 
 entity jpa --class ~.model.engineer
 field string --fieldName email
 field string --fieldName name
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-17 20:53:04
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests

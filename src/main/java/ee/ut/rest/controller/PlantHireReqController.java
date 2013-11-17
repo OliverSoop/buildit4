@@ -25,6 +25,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 import ee.ut.domain.PlantHireRequestStatus;
 import ee.ut.domain.PurchaseOrderStatus;
@@ -291,6 +292,7 @@ public class PlantHireReqController {
 		String DOMAIN_URL = "http://rentit4.herokuapp.com/";
 
 		Client client = Client.create();
+    	client.addFilter(new HTTPBasicAuthFilter("customer", "customer"));
 		WebResource webResource = client.resource(DOMAIN_URL
 				+ "rest/purchaseorders");
 

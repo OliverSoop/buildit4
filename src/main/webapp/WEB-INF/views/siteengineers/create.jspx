@@ -4,6 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_ee_ut_model_SiteEngineer" modelAttribute="siteEngineer" path="/siteengineers" render="${empty dependencies}" z="J51En+JJ3AqG/oQAdNUTu32rxAo=">
         <field:input field="name" id="c_ee_ut_model_SiteEngineer_name" z="cbU3IuzGyhvQ+UbKYoGYFdeCbvk="/>
+        <field:input field="email" id="c_ee_ut_model_SiteEngineer_email" validationMessageCode="field_invalid_email" z="yUnvoH4J6e6GDq8XJqYhCq7X7mQ="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_ee_ut_model_SiteEngineer" render="${not empty dependencies}" z="YPyxfOX2stq4ju/MDwoNKTgp7E4="/>
 </div>

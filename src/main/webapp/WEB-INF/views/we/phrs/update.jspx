@@ -9,5 +9,7 @@
         <field:display field="siteEngineer" id="c_ee_ut_model_PlantHireRequest_siteEngineer" object="${plantHireRequest}" z="user-managed"/>
         <field:select field="status" id="c_ee_ut_model_PlantHireRequest_status" items="${planthirerequeststatuses}" path="planthirerequeststatuses" z="2nMTauFw4B8kvYaoisOekPPXFKY="/>
         <input type="submit" value="Update status"/>
-   </sform:form>
+        <field:input field="totalCost" id="c_ee_ut_model_PlantHireRequest_totalCost" validationMessageCode="field_invalid_number" z="NCXckJ2URPQ4FAarWavAHkV8/bw="/>
+        <field:select field="constructionSite" id="c_ee_ut_model_PlantHireRequest_constructionSite" itemValue="id" items="${constructionsites}" path="/constructionsites" z="pf0UXMoc9KNNyt1r1OSfI8sFEJY="/>
+    </sform:form>
 </div>

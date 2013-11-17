@@ -34,4 +34,8 @@ public class PurchaseOrder {
     /**
      */
     private String ExternalID;
+
+	public String getExternalID() {
+        return this.ExternalID;
+    }
 }

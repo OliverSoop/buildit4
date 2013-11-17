@@ -3,28 +3,23 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
 import java.util.Date;
-import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 import ee.ut.rest.ConstructionSiteResource;
 import ee.ut.rest.PlantHireRequestResource;
 import ee.ut.rest.RequestedPlantResource;
 import ee.ut.rest.SiteEngineerResource;
 import ee.ut.rest.SupplierResource;
-import ee.ut.soap.client.PlantResource;
-import ee.ut.soap.client.PlantResourceList;
-import ee.ut.soap.client.PlantSOAPService;
-import ee.ut.soap.client.PlantSOAPServiceService;
 
 @RunWith(JUnit4.class)
 public class PlantHireReqControllerTest {
@@ -35,14 +30,16 @@ public class PlantHireReqControllerTest {
     @Test
     public void testCreatePHR() {
     	ClientResponse response = createPlantHireRequestResource();
+    	System.out.println("stat " + response.getStatus());
     	assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
     }
     
     @Test
     public void testDeletePHR() {
     	ClientResponse response = createPlantHireRequestResource();
-
     	Client client = Client.create();
+    	client.addFilter(new HTTPBasicAuthFilter("provider", "admin"));
+    	System.out.println("Location : " + response.getLocation());
     	WebResource webResource = client.resource(response.getLocation().toString() + "/cancel");
     	ClientResponse deleteResponse = webResource.type(MediaType.APPLICATION_XML)
 										.accept(MediaType.APPLICATION_XML)
@@ -74,6 +71,7 @@ public class PlantHireReqControllerTest {
       
     private ClientResponse getPlantHireRequestResource(URI location) {
     	Client client = Client.create();
+    	client.addFilter(new HTTPBasicAuthFilter("provider", "admin"));
     	WebResource webResource = client.resource(location);
     	return webResource.type(MediaType.APPLICATION_XML)
 												.accept(MediaType.APPLICATION_XML)
@@ -82,6 +80,7 @@ public class PlantHireReqControllerTest {
     
     private ClientResponse createPlantHireRequestResource() {
     	Client client = Client.create();
+    	client.addFilter(new HTTPBasicAuthFilter("provider", "admin"));
     	WebResource webResource = client.resource(DOMAIN_URL + "/rest/phr");
     	
     	PlantHireRequestResource phr = new PlantHireRequestResource();
@@ -113,6 +112,7 @@ public class PlantHireReqControllerTest {
     
     private ClientResponse modifiedPlantHireRequestResource(URI uri) {
     	Client client = Client.create();
+    	client.addFilter(new HTTPBasicAuthFilter("provider", "admin"));
     	WebResource webResource = client.resource(uri);
     	
     	PlantHireRequestResource phr = new PlantHireRequestResource();
