@@ -154,7 +154,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<SiteEngineer, String> ApplicationConversionServiceFactoryBean.getSiteEngineerToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ee.ut.model.SiteEngineer, java.lang.String>() {
             public String convert(SiteEngineer siteEngineer) {
-                return new StringBuilder().append(siteEngineer.getName()).toString();
+                return new StringBuilder().append(siteEngineer.getEmail()).append(' ').append(siteEngineer.getName()).toString();
             }
         };
     }

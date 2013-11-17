@@ -5,22 +5,15 @@ package ee.ut.model;
 
 import ee.ut.model.Engineer;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Version;
 
 privileged aspect Engineer_Roo_Jpa_Entity {
     
     declare @type: Engineer: @Entity;
-    
-    declare @type: Engineer: @Inheritance(strategy = InheritanceType.SINGLE_TABLE);
-    
-    declare @type: Engineer: @DiscriminatorColumn;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -7,6 +7,14 @@ import ee.ut.model.Engineer;
 
 privileged aspect Engineer_Roo_JavaBean {
     
+    public String Engineer.getEmail() {
+        return this.email;
+    }
+    
+    public void Engineer.setEmail(String email) {
+        this.email = email;
+    }
+    
     public String Engineer.getName() {
         return this.name;
     }

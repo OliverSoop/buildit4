@@ -15,8 +15,7 @@ privileged aspect Engineer_Roo_Jpa_ActiveRecord {
     transient EntityManager Engineer.entityManager;
     
     public static final EntityManager Engineer.entityManager() {
-        EntityManager em = new Engineer() {
-        }.entityManager;
+        EntityManager em = new Engineer().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }

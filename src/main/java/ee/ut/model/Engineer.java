@@ -5,8 +5,12 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(inheritanceType = "SINGLE_TABLE")
-public abstract class Engineer {
+@RooJpaActiveRecord
+public class Engineer {
+
+    /**
+     */
+    private String email;
 
     /**
      */

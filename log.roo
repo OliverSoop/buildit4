@@ -431,3 +431,11 @@ focus --class ~.security.Authorities
 web mvc scaffold --class ~.security.AuthoritiesController --path /security/authorities
 focus --class ~.security.Assignments
 web mvc scaffold --class ~.security.AssignmentsController --path /security/assignments
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-17 15:03:55
+hint
+focus --class ~.model.PlantHireRequest
+web mvc scaffold --class ~.web.we.PHRWEController --path /we/phrs --backingType ~.model.PlantHireRequest --disallowedOperations create
+web mvc scaffold --class ~.web.se.PHRSEController --path /se/phrs --backingType ~.model.PlantHireRequest --disallowedOperations delete
+entity jpa --class ~.model.engineer
+field string --fieldName email
+field string --fieldName name

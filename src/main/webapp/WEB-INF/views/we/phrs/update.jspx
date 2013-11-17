@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:sform="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <spring:url value="/we/phrs" var="url"/>
+    <sform:form action="${url}" id="fu_ee_ut_model_PlantHireRequest" method="PUT" modelAttribute="plantHireRequest" path="/we/phrs" versionField="Version" z="user-managed">
+        <sform:hidden path="id"/>
+        <field:display dateTimePattern="${plantHireRequest_startdate_date_format}" field="startDate" id="c_ee_ut_model_PlantHireRequest_startDate" object="${plantHireRequest}" z="user-managed"/>
+        <field:display dateTimePattern="${plantHireRequest_enddate_date_format}" field="endDate" id="c_ee_ut_model_PlantHireRequest_endDate" object="${plantHireRequest}" z="user-managed"/>
+        <field:display field="requestedPlant" id="c_ee_ut_model_PlantHireRequest_requestedPlant" object="${plantHireRequest}" z="user-managed"/>
+        <field:display field="siteEngineer" id="c_ee_ut_model_PlantHireRequest_siteEngineer" object="${plantHireRequest}" z="user-managed"/>
+        <field:select field="status" id="c_ee_ut_model_PlantHireRequest_status" items="${planthirerequeststatuses}" path="planthirerequeststatuses" z="2nMTauFw4B8kvYaoisOekPPXFKY="/>
+        <input type="submit" value="Update status"/>
+   </sform:form>
+</div>

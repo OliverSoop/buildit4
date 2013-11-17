@@ -11,6 +11,7 @@
 <aspect name="ee.ut.model.Engineer_Roo_JavaBean"/>
 <aspect name="ee.ut.rest.PurchaseOrderResource_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Supplier_Roo_Configurable"/>
+<aspect name="ee.ut.web.se.PHRSEController_Roo_Controller"/>
 <aspect name="ee.ut.security.Assignments_Roo_Configurable"/>
 <aspect name="ee.ut.model.Invoice_Roo_Configurable"/>
 <aspect name="ee.ut.security.Authorities_Roo_Jpa_Entity"/>
@@ -59,6 +60,7 @@
 <aspect name="ee.ut.repository.ConstructionSiteRepository_Roo_Jpa_Repository"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.model.Engineer_Roo_Jpa_ActiveRecord"/>
+<aspect name="ee.ut.web.we.PHRWEController_Roo_Controller"/>
 <aspect name="ee.ut.model.SiteEngineer_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.rest.InvoiceResource_Roo_JavaBean"/>
 <aspect name="ee.ut.model.SiteEngineer_Roo_Configurable"/>

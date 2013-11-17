@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_ee_ut_model_PlantHireRequest" modelAttribute="plantHireRequest" path="/se/phrs" versionField="Version" z="ZHebvccUJ5OfQXdrPFVAo+VjcFw=">
+        <field:datetime dateTimePattern="${plantHireRequest_startdate_date_format}" field="startDate" id="c_ee_ut_model_PlantHireRequest_startDate" z="Df1KZSAaynVIxkrBLJEisTz+iqE="/>
+        <field:datetime dateTimePattern="${plantHireRequest_enddate_date_format}" field="endDate" id="c_ee_ut_model_PlantHireRequest_endDate" z="HaeeZd+ucTuIbxrQ6DZE5im6Ets="/>
+        <field:input field="totalCost" id="c_ee_ut_model_PlantHireRequest_totalCost" validationMessageCode="field_invalid_number" z="NCXckJ2URPQ4FAarWavAHkV8/bw="/>
+        <field:select field="constructionSite" id="c_ee_ut_model_PlantHireRequest_constructionSite" itemValue="id" items="${constructionsites}" path="/constructionsites" z="pf0UXMoc9KNNyt1r1OSfI8sFEJY="/>
+        <field:select field="requestedPlant" id="c_ee_ut_model_PlantHireRequest_requestedPlant" itemValue="id" items="${requestedplants}" path="/requestedplants" z="Fx5a9rjc04ASbrlWnUkk6yguvL0="/>
+        <field:select field="siteEngineer" id="c_ee_ut_model_PlantHireRequest_siteEngineer" itemValue="id" items="${siteengineers}" path="/siteengineers" z="btId0FlE+PgFHt9Ux1A7DjV+kqE="/>
+        <field:select field="status" id="c_ee_ut_model_PlantHireRequest_status" items="${planthirerequeststatuses}" path="planthirerequeststatuses" z="2nMTauFw4B8kvYaoisOekPPXFKY="/>
+    </form:update>
+</div>
