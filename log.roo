@@ -413,3 +413,21 @@ perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-13 19:27:56
 hint
 web mvc all --package ~.web
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-17 14:12:42
+hint
+security setup
+entity jpa --class ~.security.Users
+field string --fieldName username
+field string --fieldName password
+field boolean --fieldName enabled
+entity jpa --class ~.security.Authorities
+field string --fieldName authority
+entity jpa --class ~.security.Assignments
+field reference --fieldName userBuildIt --type ~.security.Users
+field reference --fieldName authority --type ~.security.Authorities
+focus --class ~.security.Users
+web mvc scaffold --class ~.security.UsersController --path /security/users
+focus --class ~.security.Authorities
+web mvc scaffold --class ~.security.AuthoritiesController --path /security/authorities
+focus --class ~.security.Assignments
+web mvc scaffold --class ~.security.AssignmentsController --path /security/assignments
