@@ -308,6 +308,7 @@ public class PlantHireReqController {
 		por.setPOrecievedDate(po.getDateCreated());
 		por.setStatus(po.getStatus());
 		por.setReturnDate(po.getPlantHireRequest().getEndDate());
+		por.setEmail(po.getPlantHireRequest().getSiteEngineer().getEmail());
 
 		
 		return webResource.type(MediaType.APPLICATION_XML)

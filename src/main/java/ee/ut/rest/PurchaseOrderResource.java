@@ -23,5 +23,5 @@ public class PurchaseOrderResource extends ResourceSupport {
     private Date POrecievedDate;
     private PurchaseOrderStatus status;
     private Date returnDate;
-
+    private String email;
 }
