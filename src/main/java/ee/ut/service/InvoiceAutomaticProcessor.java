@@ -58,7 +58,7 @@ public class InvoiceAutomaticProcessor {
 			mailMessage.setTo(invoiceRes.getReturnEmail());
 			mailMessage.setSentDate(new Date());
 			mailMessage.setSubject("Error on invoice");
-			mailMessage.setText("Did not find PO, id: " + POid);
+			mailMessage.setText("Did not find purchase order, id: " + POid + " . Error: " + e);
 			return mailMessage;
 		}
 		
