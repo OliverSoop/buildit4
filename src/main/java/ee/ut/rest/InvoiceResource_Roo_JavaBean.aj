@@ -40,4 +40,12 @@ privileged aspect InvoiceResource_Roo_JavaBean {
         this.status = status;
     }
     
+    public Long InvoiceResource.getExternalId() {
+        return this.externalId;
+    }
+    
+    public void InvoiceResource.setExternalId(Long externalId) {
+        this.externalId = externalId;
+    }
+    
 }

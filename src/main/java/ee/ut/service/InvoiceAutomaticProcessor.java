@@ -46,7 +46,7 @@ public class InvoiceAutomaticProcessor {
 		invoiceNew.setReturnEmail(invoiceRes.getReturnEmail());
 		invoiceNew.setStatus(InvoiceStatus.DISAPPROVED);
 		invoiceNew.setTotal(invoiceRes.getTotal());
-		invoiceNew.persist();
+		invoiceNew.setExternalId(invoiceRes.getExternalId());
 
 		Float invoiceTotal = invoiceRes.getTotal();
 		String POid = invoiceRes.getPurchaseOrderHRef();
@@ -72,6 +72,7 @@ public class InvoiceAutomaticProcessor {
 		
 		if(invoiceTotal.equals(phrTotal) && poStatus != poStatus.PAID){
 			mailMessage.setText("Total match and it is unpaid, well done");
+			invoiceNew.persist();
 			
 		}else{
 			mailMessage.setText("Totals dont match or this PO is paid. Invoice total: " + invoiceTotal +

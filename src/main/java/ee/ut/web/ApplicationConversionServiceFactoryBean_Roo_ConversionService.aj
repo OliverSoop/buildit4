@@ -58,7 +58,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Invoice, String> ApplicationConversionServiceFactoryBean.getInvoiceToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ee.ut.model.Invoice, java.lang.String>() {
             public String convert(Invoice invoice) {
-                return new StringBuilder().append(invoice.getTotal()).append(' ').append(invoice.getPurchaseOrderHRef()).append(' ').append(invoice.getReturnEmail()).toString();
+                return new StringBuilder().append(invoice.getTotal()).append(' ').append(invoice.getPurchaseOrderHRef()).append(' ').append(invoice.getReturnEmail()).append(' ').append(invoice.getExternalId()).toString();
             }
         };
     }

@@ -24,18 +24,11 @@ import ee.ut.rest.PurchaseOrderResource;
 
 @Component
 public class InvoiceHumanAssistedHandling {
-
-//	@ServiceActivator
-	
-	//TO-DO
-//	InvoiceAutomaticProcessor and InvoiceHumanAssistedHandling classes will look similar to
-//	InvoiceMailPreprocessor, where the class is annotated with @Component and the method to be
-//	executed with @ServiceActivator. In the classes InvoiceAutomaticProcessor and
-//	InvoiceHumanAssistedHandling you will specify the code for making payment of the invoices or
-//	sending them for approval.
 	
 	@ServiceActivator
 	public MailMessage process(Document invoice) throws JAXBException {
+		
+		System.out.println("This is in human assisted");
 		
 		MailMessage mailMessage = new SimpleMailMessage();
 		JAXBContext jaxbCtx = JAXBContext.newInstance(InvoiceResource.class);
@@ -47,7 +40,7 @@ public class InvoiceHumanAssistedHandling {
 		invoiceNew.setReturnEmail(invoiceRes.getReturnEmail());
 		invoiceNew.setStatus(InvoiceStatus.DISAPPROVED);
 		invoiceNew.setTotal(invoiceRes.getTotal());
-		
+		invoiceNew.setExternalId(invoiceRes.getExternalId());
 		
 		Float invoiceTotal = invoiceRes.getTotal();
 		String POid = invoiceRes.getPurchaseOrderHRef();
@@ -63,8 +56,6 @@ public class InvoiceHumanAssistedHandling {
 			return mailMessage;
 		}
 		
-		invoiceNew.persist();
-		
 		PurchaseOrderStatus poStatus = po.getStatus();
 		
 		Float phrTotal = phr.getTotalCost();
@@ -75,6 +66,7 @@ public class InvoiceHumanAssistedHandling {
 		
 		if(invoiceTotal.equals(phrTotal) && poStatus != poStatus.PAID){
 			mailMessage.setText("Total match and it is unpaid, well done");
+			invoiceNew.persist();
 			
 		}else{
 			mailMessage.setText("Totals dont match or this PO is paid. Invoice total: " + invoiceTotal +

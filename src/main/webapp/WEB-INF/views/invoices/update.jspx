@@ -7,5 +7,6 @@
         <field:input field="purchaseOrderHRef" id="c_ee_ut_model_Invoice_purchaseOrderHRef" z="m+UQroE/5IXX8jqur8dNKhiHIF8="/>
         <field:input field="returnEmail" id="c_ee_ut_model_Invoice_returnEmail" z="9UbHL3e0Xs67LSMUtnfGXrYCtOY="/>
         <field:select field="status" id="c_ee_ut_model_Invoice_status" items="${invoicestatuses}" path="invoicestatuses" z="2Y6U0de+04T9d4ioZFKVbeZvIkw="/>
+        <field:input field="externalId" id="c_ee_ut_model_Invoice_externalId" validationMessageCode="field_invalid_integer" z="2+zLXctkcWWccmQOmN4irWjCepQ="/>
     </form:update>
 </div>

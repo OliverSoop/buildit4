@@ -14,4 +14,5 @@ public class Invoice {
 	private String purchaseOrderHRef;
 	private String returnEmail;
 	private InvoiceStatus status;
+	private Long externalId;
 }
