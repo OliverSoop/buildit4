@@ -58,7 +58,7 @@ public class InvoiceController {
 		mailMessage.setTo(invoice.getReturnEmail());
 		mailMessage.setSentDate(new Date());
 		mailMessage.setSubject("Status changed to APPROVED");
-		mailMessage.setText("You may start paying. Assosiated PO: " + invoice.getPurchaseOrderHRef());
+		mailMessage.setText("We paid the invoice. Assosiated Purchase Order nr: " + invoice.getPurchaseOrderHRef().substring(invoice.getPurchaseOrderHRef().lastIndexOf("/") + 1));
 		mailSender.send(mailMessage);
 	}
 }

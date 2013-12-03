@@ -47,7 +47,7 @@ public class InvoiceHumanAssistedHandling {
 		invoiceNew.setReturnEmail(invoiceRes.getReturnEmail());
 		invoiceNew.setStatus(InvoiceStatus.DISAPPROVED);
 		invoiceNew.setTotal(invoiceRes.getTotal());
-		invoiceNew.persist();
+		
 		
 		Float invoiceTotal = invoiceRes.getTotal();
 		String POid = invoiceRes.getPurchaseOrderHRef();
@@ -62,6 +62,8 @@ public class InvoiceHumanAssistedHandling {
 			mailMessage.setText("Did not find PO, id: " + POid);
 			return mailMessage;
 		}
+		
+		invoiceNew.persist();
 		
 		PurchaseOrderStatus poStatus = po.getStatus();
 		
