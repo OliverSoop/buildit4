@@ -5,6 +5,7 @@ package ee.ut.model;
 
 import ee.ut.domain.InvoiceStatus;
 import ee.ut.model.Invoice;
+import java.util.Date;
 
 privileged aspect Invoice_Roo_JavaBean {
     
@@ -46,6 +47,14 @@ privileged aspect Invoice_Roo_JavaBean {
     
     public void Invoice.setExternalId(Long externalId) {
         this.externalId = externalId;
+    }
+    
+    public Date Invoice.getDeadline() {
+        return this.deadline;
+    }
+    
+    public void Invoice.setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
     
 }

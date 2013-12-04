@@ -47,6 +47,7 @@ public class InvoiceAutomaticProcessor {
 		invoiceNew.setStatus(InvoiceStatus.DISAPPROVED);
 		invoiceNew.setTotal(invoiceRes.getTotal());
 		invoiceNew.setExternalId(invoiceRes.getExternalId());
+		invoiceNew.setDeadline(invoiceRes.getDeadline());
 
 		Float invoiceTotal = invoiceRes.getTotal();
 		String POid = invoiceRes.getPurchaseOrderHRef();
