@@ -28,8 +28,6 @@ public class InvoiceHumanAssistedHandling {
 	@ServiceActivator
 	public MailMessage process(Document invoice) throws JAXBException {
 		
-		System.out.println("This is in human assisted");
-		
 		MailMessage mailMessage = new SimpleMailMessage();
 		JAXBContext jaxbCtx = JAXBContext.newInstance(InvoiceResource.class);
 		InvoiceResource invoiceRes = (InvoiceResource) jaxbCtx
