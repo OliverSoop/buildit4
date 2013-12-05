@@ -472,11 +472,6 @@ hint
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-04 15:29:14
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-04 16:02:12
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-04 17:13:35
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-04 17:50:05
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-04 18:22:49
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-04 18:51:25
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-04 20:52:00
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-05 14:45:21
-hint
-perform tests
-// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-05 16:43:52
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-04 20:25:45
+focus --class ~.model.Invoice
+field date --fieldName deadline --type java.util.Date

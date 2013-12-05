@@ -9,8 +9,6 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
-
-
 import org.w3c.dom.Document;
 
 import ee.ut.domain.InvoiceStatus;
@@ -19,7 +17,6 @@ import ee.ut.model.Invoice;
 import ee.ut.model.PlantHireRequest;
 import ee.ut.model.PurchaseOrder;
 import ee.ut.rest.InvoiceResource;
-import ee.ut.rest.PurchaseOrderResource;
 
 
 @Component
@@ -39,6 +36,7 @@ public class InvoiceHumanAssistedHandling {
 		invoiceNew.setStatus(InvoiceStatus.DISAPPROVED);
 		invoiceNew.setTotal(invoiceRes.getTotal());
 		invoiceNew.setExternalId(invoiceRes.getExternalId());
+		invoiceNew.setDeadline(invoiceRes.getDeadline());
 		
 		Float invoiceTotal = invoiceRes.getTotal();
 		String POid = invoiceRes.getPurchaseOrderHRef();

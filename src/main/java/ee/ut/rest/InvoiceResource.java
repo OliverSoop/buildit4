@@ -1,5 +1,7 @@
 package ee.ut.rest;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -14,4 +16,5 @@ public class InvoiceResource {
 	private String returnEmail;
 	private InvoiceStatus status;
 	private Long externalId;
+	private Date deadline;
 }
