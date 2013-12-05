@@ -36,6 +36,14 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
         this.totalCost = totalCost;
     }
     
+    public String PlantHireRequest.getProviderURL() {
+        return this.providerURL;
+    }
+    
+    public void PlantHireRequest.setProviderURL(String providerURL) {
+        this.providerURL = providerURL;
+    }
+    
     public ConstructionSite PlantHireRequest.getConstructionSite() {
         return this.constructionSite;
     }

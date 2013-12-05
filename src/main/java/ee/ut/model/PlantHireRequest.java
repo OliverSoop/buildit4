@@ -31,6 +31,10 @@ public class PlantHireRequest {
     /**
      */
     private Float totalCost;
+    
+    /**
+     */
+    private String providerURL;
 
     /**
      */

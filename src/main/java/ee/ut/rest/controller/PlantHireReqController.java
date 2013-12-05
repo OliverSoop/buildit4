@@ -268,7 +268,7 @@ public class PlantHireReqController {
 				po.setStatus(PurchaseOrderStatus.CREATED);
 				po.setDateCreated(new Date());
 				po.persist();
-				PurchaseOrderResource por = submitPO(po);
+				PurchaseOrderResource por = submitPO(po, po.getPlantHireRequest().getProviderURL());
 				if(por != null){
 					return new ResponseEntity<PurchaseOrderResource>(por, HttpStatus.OK);
 				}
@@ -279,8 +279,8 @@ public class PlantHireReqController {
 		return new ResponseEntity<PurchaseOrderResource>(HttpStatus.NOT_FOUND);
 	}
 	
-	public PurchaseOrderResource submitPO(PurchaseOrder po) {
-		ClientResponse response = createPurchaseOrderResource(po);
+	public PurchaseOrderResource submitPO(PurchaseOrder po, String DOMAIN_URL) {
+		ClientResponse response = createPurchaseOrderResource(po, DOMAIN_URL);
 
 		PurchaseOrderResource rs = response.getEntity(PurchaseOrderResource.class);
 		
@@ -288,8 +288,7 @@ public class PlantHireReqController {
 	}
 
 
-	private ClientResponse createPurchaseOrderResource(PurchaseOrder po) {
-		String DOMAIN_URL = "http://rentit4.herokuapp.com/";
+	private ClientResponse createPurchaseOrderResource(PurchaseOrder po, String DOMAIN_URL) {
 
 		Client client = Client.create();
     	client.addFilter(new HTTPBasicAuthFilter("customer", "customer"));

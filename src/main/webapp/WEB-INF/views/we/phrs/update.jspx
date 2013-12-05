@@ -11,5 +11,6 @@
         <input type="submit" value="Update status"/>
         <field:input field="totalCost" id="c_ee_ut_model_PlantHireRequest_totalCost" validationMessageCode="field_invalid_number" z="NCXckJ2URPQ4FAarWavAHkV8/bw="/>
         <field:select field="constructionSite" id="c_ee_ut_model_PlantHireRequest_constructionSite" itemValue="id" items="${constructionsites}" path="/constructionsites" z="pf0UXMoc9KNNyt1r1OSfI8sFEJY="/>
+        <field:input field="providerURL" id="c_ee_ut_model_PlantHireRequest_providerURL" z="1tRIi1+OxG0+T6X3jIdVaLj8F28="/>
     </sform:form>
 </div>

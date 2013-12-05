@@ -9,7 +9,7 @@
             <table:column id="c_ee_ut_model_PlantHireRequest_totalCost" property="totalCost" z="F+08M2xrK9gT2m6yJay7J5CfdkY="/>
             <table:column id="c_ee_ut_model_PlantHireRequest_constructionSite" property="constructionSite" z="AdLu5HhQjwCjosi5QtJp47gtTus="/>
             <table:column id="c_ee_ut_model_PlantHireRequest_requestedPlant" property="requestedPlant" z="OeKTIy8yzvifJCyTKWKBLJSizQQ="/>
-            <table:column id="c_ee_ut_model_PlantHireRequest_siteEngineer" property="siteEngineer" z="qb/WzRu1zyJReEjU8FrT7rwDW2I="/>
+            <table:column id="c_ee_ut_model_PlantHireRequest_providerURL" property="providerURL" z="WR3y3YLA6XZercbelf710JXSCwo="/>
         </table:table>
     </page:list>
 </div>

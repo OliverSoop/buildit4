@@ -16,6 +16,7 @@
 -->
         <field:select field="siteEngineer" id="c_ee_ut_model_PlantHireRequest_siteEngineer" itemValue="id" items="${siteengineers}" path="/siteengineers" z="btId0FlE+PgFHt9Ux1A7DjV+kqE="/>
         <field:select field="status" id="c_ee_ut_model_PlantHireRequest_status" items="${planthirerequeststatuses}" path="planthirerequeststatuses" z="2nMTauFw4B8kvYaoisOekPPXFKY="/>
+        <field:input field="providerURL" id="c_ee_ut_model_PlantHireRequest_providerURL" z="1tRIi1+OxG0+T6X3jIdVaLj8F28="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_ee_ut_model_PlantHireRequest" render="${not empty dependencies}" z="UMuVrEQrxKJMv9Kwqom8GaCAjmw="/>
 </div>
