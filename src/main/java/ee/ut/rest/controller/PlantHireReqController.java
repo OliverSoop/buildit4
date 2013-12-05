@@ -267,6 +267,7 @@ public class PlantHireReqController {
 				po.setPlantHireRequest(phr);
 				po.setStatus(PurchaseOrderStatus.CREATED);
 				po.setDateCreated(new Date());
+				po.setSubmitted(true);
 				po.persist();
 				PurchaseOrderResource por = submitPO(po, po.getPlantHireRequest().getProviderURL());
 				if(por != null){

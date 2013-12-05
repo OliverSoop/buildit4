@@ -38,4 +38,12 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.ExternalID = ExternalID;
     }
     
+    public Boolean PurchaseOrder.getSubmitted() {
+        return this.submitted;
+    }
+    
+    public void PurchaseOrder.setSubmitted(Boolean submitted) {
+        this.submitted = submitted;
+    }
+    
 }

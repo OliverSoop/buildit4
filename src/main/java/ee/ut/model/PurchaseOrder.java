@@ -38,4 +38,8 @@ public class PurchaseOrder {
 	public String getExternalID() {
         return this.ExternalID;
     }
+	
+    /**
+     */
+    private Boolean submitted;
 }

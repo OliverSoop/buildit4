@@ -7,5 +7,6 @@
         <field:display date="true" dateTimePattern="${purchaseOrder_datecreated_date_format}" field="dateCreated" id="s_ee_ut_model_PurchaseOrder_dateCreated" object="${purchaseorder}" z="vx6gP2iKRHhZ8XRM2arVX8RoWos="/>
         <field:display field="externalID" id="s_ee_ut_model_PurchaseOrder_ExternalID" object="${purchaseorder}" z="cVGfIV+MJ9nH5Eb3FzNfwWrYxZY="/>
         <field:display field="status" id="s_ee_ut_model_PurchaseOrder_status" object="${purchaseorder}" z="/BqtaQ4nzmRrIIKKmMAPdzPears="/>
+        <field:display field="submitted" id="s_ee_ut_model_PurchaseOrder_submitted" object="${purchaseorder}" z="eRM1NJYk5MD/BZ+FK9AqRYkdfQg="/>
     </page:show>
 </div>
