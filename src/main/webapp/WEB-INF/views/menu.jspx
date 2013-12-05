@@ -15,12 +15,12 @@
             <menu:item id="i_supplier_new" messageCode="global_menu_new" url="/suppliers?form" z="48D4zeaX6ENxXujfvnWrtY5odlQ="/>
             <menu:item id="i_supplier_list" messageCode="global_menu_list" url="/suppliers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="m3iWO9PZ5+HPrY21osNhms/WqIE="/>
         </menu:category>
-        <sec:authorize ifAllGranted="ROLE_WORKS_ENGINEER">
+        <sec:authorize access="hasAnyRole('ROLE_WORKS_ENGINEER', 'ROLE_ADMIN')">
             <menu:category id="c_planthirerequest" z="RYvAYDPxevYbz1bZdWQ+gP48NkM=">
                 <menu:item id="i_planthirerequest_list" messageCode="global_menu_list" url="/we/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </menu:category>
         </sec:authorize>
-        <sec:authorize ifAllGranted="ROLE_SITE_ENGINEER">
+        <sec:authorize access="hasAnyRole('ROLE_SITE_ENGINEER', 'ROLE_ADMIN')">
             <menu:category id="c_planthirerequest" z="user-managed">
                 <menu:item id="i_planthirerequest_new" messageCode="global_menu_new" url="/se/phrs?form" z="user-managed"/>
                 <menu:item id="i_planthirerequest_list" messageCode="global_menu_list" url="/se/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>

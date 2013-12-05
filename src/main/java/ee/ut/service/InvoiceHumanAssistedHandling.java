@@ -67,6 +67,7 @@ public class InvoiceHumanAssistedHandling {
 			invoiceNew.persist();
 			
 		}else{
+			mailMessage.setSubject("Error on invoivce");
 			mailMessage.setText("Totals dont match or this PO is paid. Invoice total: " + invoiceTotal +
 					" and our total: " + phrTotal + ". PO status: " + poStatus);
 		}

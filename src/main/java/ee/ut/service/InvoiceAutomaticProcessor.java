@@ -75,6 +75,7 @@ public class InvoiceAutomaticProcessor {
 			invoiceNew.persist();
 			
 		}else{
+			mailMessage.setSubject("The payment is being processed");
 			mailMessage.setText("Totals dont match or this PO is paid. Invoice total: " + invoiceTotal +
 					" and our total: " + phrTotal + ". PO status: " + poStatus);
 		}
