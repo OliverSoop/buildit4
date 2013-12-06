@@ -282,7 +282,9 @@ public class PlantHireReqController {
 	
 	public PurchaseOrderResource submitPO(PurchaseOrder po, String DOMAIN_URL) {
 		ClientResponse response = createPurchaseOrderResource(po, DOMAIN_URL);
-
+		if(response.getStatus() != 201){
+			return null;
+		}
 		PurchaseOrderResource rs = response.getEntity(PurchaseOrderResource.class);
 		
 		return rs;
