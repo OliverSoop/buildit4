@@ -3,11 +3,14 @@ package ee.ut.rest.controller;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URI;
 import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -33,7 +36,7 @@ public class PlantHireReqLifeCycleTest {
 	private static String DOMAIN_URL2 = "http://rentit4.herokuapp.com/";
 
 	@Test
-	public void testPlantHireReqLifeCycle(){
+	public void testPlantHireReqLifeCycle() throws IOException{
 		//Create a Plant Hire Request using the RESTful service in Heroku
 		ClientResponse response = createPlantHireRequestResource();
     	assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
@@ -48,6 +51,12 @@ public class PlantHireReqLifeCycleTest {
     	//Approve the obtained Plant Hire Request and
     	response= acceptPlantHireRequestResource(acceptLink);
     	assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
+    	System.out.println("Vla" + response.getStatus());
+    	System.out.println("T" + response.getLength());
+    	StringWriter writer = new StringWriter();
+    	IOUtils.copy(response.getEntityInputStream(), writer, "UTF-8");
+    	String theString = writer.toString();
+    	System.out.println(theString + "\n\n");
     	
     	//Obtain the Purchase Order resource (POresource) from the response of previous point.
     	PurchaseOrderResource por = response.getEntity(PurchaseOrderResource.class);
@@ -70,6 +79,7 @@ public class PlantHireReqLifeCycleTest {
     	phr.setStartDate(new Date());
     	phr.setEndDate(new Date());
     	phr.setTotalCost(40.2F);
+    	phr.setProviderURL(DOMAIN_URL2);
     	
     	ConstructionSiteResource site = new ConstructionSiteResource();
     	site.setLocation("Neighbour");

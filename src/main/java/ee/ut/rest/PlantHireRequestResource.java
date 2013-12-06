@@ -20,6 +20,7 @@ public class PlantHireRequestResource extends ResourceSupport {
     private SiteEngineerResource siteEngineer;
     private ConstructionSiteResource constructionSite;
     private String status;
+    private String providerURL;
     
     @XmlJavaTypeAdapter(DateAdapter.class)
 	public Date getStartDate() {
@@ -78,4 +79,12 @@ public class PlantHireRequestResource extends ResourceSupport {
 	public void setStatus(String status) {
         this.status = status;
     }
+	
+	public String getProviderURL() {
+		return providerURL;
+	}
+	
+	public void setProviderURL(String providerURL) {
+		this.providerURL = providerURL;
+	}
 }

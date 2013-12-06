@@ -26,6 +26,7 @@ public class PlantHireRequestService {
 			plantHireRequest.setEndDate(phr.getEndDate());
 			plantHireRequest.setTotalCost(phr.getTotalCost());
 			plantHireRequest.setStatus(PlantHireRequestStatus.PENDING_CONFIRMATION);
+			plantHireRequest.setProviderURL(phr.getProviderURL());
 //			plantHireRequest.setConstructionSite(csSites.get(0));
 			
 			ConstructionSite site = new ConstructionSite();

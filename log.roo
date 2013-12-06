@@ -483,3 +483,9 @@ field date --fieldName deadline --type java.util.Date
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-06 10:52:36
 perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-06 12:54:49
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-06 13:03:57
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
