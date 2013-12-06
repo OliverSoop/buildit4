@@ -87,6 +87,7 @@ public class PlantHireReqController {
 				
 				SiteEngineer siteEngineer = new SiteEngineer();
 				siteEngineer.setName(phr.getSiteEngineer().getName());
+				siteEngineer.setEmail(phr.getSiteEngineer().getEmail());
 				constructionSite.setSiteEngineers(Collections.singleton(siteEngineer));
 				siteEngineer.persist();
 				

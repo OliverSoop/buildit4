@@ -10,4 +10,5 @@ import ee.ut.util.ResourceSupport;
 @XmlRootElement(name = "siteEngineer")
 public class SiteEngineerResource extends ResourceSupport {
 	private String name;
+	private String email;
 }

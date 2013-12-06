@@ -88,6 +88,7 @@ public class PlantHireReqLifeCycleTest {
     	
     	SiteEngineerResource engineer = new SiteEngineerResource();
     	engineer.setName("Engineer");
+    	engineer.setEmail("buildit4app@gmail.com");
     	phr.setSiteEngineer(engineer);
     	
     	RequestedPlantResource rpr = new RequestedPlantResource();
