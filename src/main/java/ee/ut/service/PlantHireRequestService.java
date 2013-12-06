@@ -39,6 +39,7 @@ public class PlantHireRequestService {
 			//TODO SiteEngineer should be retrieved from DB as well
 			SiteEngineer siteEngineer = new SiteEngineer();
 			siteEngineer.setName(phr.getSiteEngineer().getName());
+			siteEngineer.setEmail(phr.getSiteEngineer().getEmail());
 			siteEngineer.persist();
 			
 			plantHireRequest.setSiteEngineer(siteEngineer);
