@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" id="ps_ee_ut_model_PurchaseOrder" object="${purchaseorder}" path="/se/po" z="y3nA2WaEy9DHlcwzgP8Jh+sy750=">
+        <field:display field="externalID" id="s_ee_ut_model_PurchaseOrder_ExternalID" object="${purchaseorder}" z="cVGfIV+MJ9nH5Eb3FzNfwWrYxZY="/>
+        <field:display field="status" id="s_ee_ut_model_PurchaseOrder_status" object="${purchaseorder}" z="/BqtaQ4nzmRrIIKKmMAPdzPears="/>
+        <field:display field="plantHireRequest" id="s_ee_ut_model_PurchaseOrder_plantHireRequest" object="${purchaseorder}" z="M4JuseTeu5CZIaOMC9nkxGgFwcE="/>
+        <field:display date="true" dateTimePattern="${purchaseOrder_datecreated_date_format}" field="dateCreated" id="s_ee_ut_model_PurchaseOrder_dateCreated" object="${purchaseorder}" z="vx6gP2iKRHhZ8XRM2arVX8RoWos="/>
+        <field:display field="submitted" id="s_ee_ut_model_PurchaseOrder_submitted" object="${purchaseorder}" z="eRM1NJYk5MD/BZ+FK9AqRYkdfQg="/>
+    </page:show>
+</div>

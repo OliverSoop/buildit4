@@ -26,6 +26,11 @@
                 <menu:item id="i_planthirerequest_list" messageCode="global_menu_list" url="/se/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </menu:category>
         </sec:authorize>
+        <sec:authorize access="hasAnyRole('ROLE_SITE_ENGINEER', 'ROLE_ADMIN')">
+            <menu:category id="c_extend_po_list" z="user-managed">
+                <menu:item id="i_extend_po_list" messageCode="global_menu_list" url="/se/po?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            </menu:category>
+        </sec:authorize>
         <menu:category id="c_requestedplant" z="q0hzWr15gDkarUil2aTMvkuxGV0=">
             <menu:item id="i_requestedplant_new" messageCode="global_menu_new" url="/requestedplants?form" z="8Qaip9JvCv1+rq2cZaGw4Je1/RE="/>
             <menu:item id="i_requestedplant_list" messageCode="global_menu_list" url="/requestedplants?page=1&amp;size=${empty param.size ? 10 : param.size}" z="fVCqJ34ntLd8gBegbfe4w3kSGmc="/>

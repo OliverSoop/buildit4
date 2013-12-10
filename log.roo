@@ -495,3 +495,10 @@ perform tests
 perform tests
 perform tests
 perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-06 14:35:49
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-08 21:31:55
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-08 21:56:15
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-10 18:22:59
+web mvc scaffold --class ~.web.se.POSEController --path /se/po --backingType ~.domain.PurchaseOrder --disallowedOperations create
+web mvc scaffold --class ~.web.se.POSEController --path /se/po --backingType ~.model.PurchaseOrder --disallowedOperations create

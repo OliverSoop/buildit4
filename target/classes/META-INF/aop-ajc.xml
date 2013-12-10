@@ -41,6 +41,7 @@
 <aspect name="ee.ut.security.Assignments_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.security.Users_Roo_ToString"/>
 <aspect name="ee.ut.model.Supplier_Roo_ToString"/>
+<aspect name="ee.ut.beans.PurchaseOrderExtensionBean_Roo_JavaBean"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Configurable"/>
 <aspect name="ee.ut.security.Assignments_Roo_JavaBean"/>
 <aspect name="ee.ut.security.Authorities_Roo_Jpa_ActiveRecord"/>
