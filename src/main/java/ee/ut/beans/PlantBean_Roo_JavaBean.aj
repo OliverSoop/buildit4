@@ -56,4 +56,12 @@ privileged aspect PlantBean_Roo_JavaBean {
         this.costPerDay = costPerDay;
     }
     
+    public String PlantBean.getSupplier() {
+        return this.supplier;
+    }
+    
+    public void PlantBean.setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+    
 }

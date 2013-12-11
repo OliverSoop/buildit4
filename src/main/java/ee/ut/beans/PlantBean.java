@@ -20,4 +20,5 @@ public class PlantBean {
 	Long selectedPlantId;
 	String description;
 	Double costPerDay;
+	String supplier;
 }

@@ -29,6 +29,7 @@ import ee.ut.beans.PurchaseOrderBean;
 import ee.ut.domain.PlantHireRequestStatus;
 import ee.ut.domain.PurchaseOrderStatus;
 import ee.ut.model.RequestedPlant;
+import ee.ut.model.Supplier;
 import ee.ut.soap.client.PlantResource;
 import ee.ut.soap.client.PlantResourceList;
 import ee.ut.soap.client.PlantSOAPService;
@@ -41,14 +42,15 @@ public class POController {
     @RequestMapping(method = RequestMethod.POST, value = "{id}")
     public void post(@PathVariable Long id, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
     }
-
+    
+    //VIEW WITH DATES
     @RequestMapping(method = RequestMethod.GET, value ="search")
     public String getPlants (ModelMap modelMap){
     	addDateTimeFormatPatterns(modelMap);
     	modelMap.put("plantquery", new PlantBean());
     	return "purchaseorders/newPO/search";
     }
-    //VIEW WITH DATES
+    
     void addDateTimeFormatPatterns(ModelMap modelMap) {
     	modelMap.put("plantHRBean_startr_date_format",
     	DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
@@ -72,6 +74,8 @@ public class POController {
     	return "purchaseorders/newPO/list";
     }
     
+    
+    
     public static List<PlantResource> getAvailablePlants(Date sDate, Date eDate){
 		PlantSOAPService catalog = new PlantSOAPServiceService().getPlantSOAPServicePort();
 		XMLGregorianCalendar startDate = toXMLGregorianCalendar(sDate);
@@ -94,27 +98,51 @@ public class POController {
         return xmlCalendar;
     }
     
-    @RequestMapping(method = RequestMethod.POST, value ="create")
-    public String create(@Valid PlantBean pBean, Model uiModel, HttpServletRequest request){
+    //	LIST QUERIED PLANTS
+    @RequestMapping(method = RequestMethod.GET, value ="list")
+    public String listPlants (@Valid PlantBean bean, Model uiModel, HttpServletRequest request){
+    	return "purchaseorders/newPO/list";
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value ="create")
+    public String create(@Valid PlantBean pBean, Model uiModel, ModelMap modelMap, HttpServletRequest request){
+    	Supplier sup = new Supplier();
+    	sup.setName(pBean.getSupplier());
+    	sup.persist();
+    	
     	RequestedPlant rPlant = new RequestedPlant();
     	rPlant.setExternalId(Long.toString(pBean.getSelectedPlantId()));
-    	rPlant.setDescription(pBean.getDescription());
+//    	Description too long (I think it return the desc of all plants)
+//    	rPlant.setDescription(pBean.getDescription());
+    	rPlant.setDescription("Description");
+    	rPlant.setSupplier(sup);
     	rPlant.persist();
-    	
+//    	
     	PlantHireRequestBean pHRBean = new PlantHireRequestBean();
     	pHRBean.setStartDate(pBean.getStartDate());
     	pHRBean.setEndDate(pBean.getEndDate());
     	pHRBean.setTotalCost(calcTotalcost(pBean.getStartDate(),pBean.getEndDate(), pBean.getCostPerDay()));
     	pHRBean.setRequestedPlant(rPlant);
     	pHRBean.setStatus(PlantHireRequestStatus.OPEN);
-    	
+    	    	
+    	System.out.print(pBean.getStartDate());
+    	System.out.print(pBean.getEndDate());
+    	System.out.print(pBean.getCostPerDay());
+
+
+
     	PurchaseOrderBean pOBean = new PurchaseOrderBean();
     	pOBean.setStatus(PurchaseOrderStatus.CREATED);
-    	
     	uiModel.addAttribute("plantHireRequest", pHRBean);
     	uiModel.addAttribute("po", pOBean);
     	uiModel.addAttribute("plantquery", pBean);
     	return "purchaseorders/newPO/create";
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value ="create")
+    public String createPO(@Valid PlantBean pBean, Model uiModel, HttpServletRequest request){
+    	//SAVE PO
+    	return "purchaseorders/newPO/success";
     }
     
     public Double calcTotalcost(Date sDate, Date eDate, Double costPerDay){

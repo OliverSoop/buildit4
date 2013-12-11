@@ -502,3 +502,10 @@ perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-10 18:22:59
 web mvc scaffold --class ~.web.se.POSEController --path /se/po --backingType ~.domain.PurchaseOrder --disallowedOperations create
 web mvc scaffold --class ~.web.se.POSEController --path /se/po --backingType ~.model.PurchaseOrder --disallowedOperations create
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-11 20:40:40
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-12 00:12:47
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-12 00:14:03
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-12 00:18:48
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-12 00:19:37
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-12 00:29:09
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-12 00:33:09

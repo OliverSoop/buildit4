@@ -13,4 +13,7 @@
 	<definition extends="default" name="purchaseorders/newPO/create">
 		<put-attribute name="body" value="/WEB-INF/views/purchaseorders/newpo/create.jspx"/>
 	</definition>
+	<definition extends="default" name="purchaseorders/newPO/success">
+		<put-attribute name="body" value="/WEB-INF/views/purchaseorders/newpo/success.jspx"/>
+	</definition>
 </tiles-definitions>

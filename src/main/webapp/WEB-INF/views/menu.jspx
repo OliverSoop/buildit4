@@ -8,8 +8,8 @@
             <menu:item id="i_constructionsite_list" messageCode="global_menu_list" url="/constructionsites?page=1&amp;size=${empty param.size ? 10 : param.size}" z="hGSWHfHTILThqc89dCz8jlyJp8I="/>
         </menu:category>
         <menu:category id="c_purchaseorder" z="LdgN+Z53I4kIOyJx+mc8CFmbIuU=">
-            <menu:item id="i_purchaseorder_new" messageCode="global_menu_new" url="/purchaseorders?form" z="I6gpOtV3+H+iGlPgmv55Zhufszk="/>
             <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/purchaseorders?page=1&amp;size=${empty param.size ? 10 : param.size}" z="DHer7WK9MJB49FXJX9B6Kds2DxY="/>
+            <menu:item id="i_purchaseorder_new" messageCode="global_menu_new" url="/purchaseorders?form" z="I6gpOtV3+H+iGlPgmv55Zhufszk="/>
         </menu:category>
         <menu:category id="c_supplier" z="8IYgP9HBdyozOk+Ymf37zKa+fNc=">
             <menu:item id="i_supplier_new" messageCode="global_menu_new" url="/suppliers?form" z="48D4zeaX6ENxXujfvnWrtY5odlQ="/>

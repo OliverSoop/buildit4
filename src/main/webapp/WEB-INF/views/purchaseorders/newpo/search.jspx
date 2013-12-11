@@ -7,6 +7,12 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   	<form:form method="POST" modelAttribute="plantquery">
   		<table>
+  			<tr>
+				<h3>Select plant provider</h3>
+  				<p><input type="radio" name="rentitType" value="rentit4"> RentIT4</input>
+  				<input type="radio" name="rentitType" value="rentitn"> RentITn</input>
+  				<input type="radio" name="rentitType" value="rentitn"> RentITn</input></p>
+  			</tr>
 			<tr>
 				<field:datetime dateTimePattern="${plantHRBean_startr_date_format}"
 					field="startDate" label="Start date"
